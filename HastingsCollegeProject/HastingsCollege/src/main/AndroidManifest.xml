@@ -3,7 +3,20 @@
     package="edu.hastings.hastingscollege"
     android:versionCode="1"
     android:versionName="1.0" >
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <!-- The following two permissions are not required to use
+         Google Maps Android API v2, but are recommended. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-feature
+            android:glEsVersion="0x00020000"
+            android:required="true"/>
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
@@ -26,6 +39,9 @@
         <activity
                 android:name="edu.hastings.hastingscollege.MainActivity"
                 android:label="Hastings College" />
+        <meta-data
+                android:name="com.google.android.maps.v2.API_KEY"
+                android:value="AIzaSyDkJc5_I90yt4LaErhLI7FeSNkvzQfIHIE"/>
     </application>
 
 </manifest>

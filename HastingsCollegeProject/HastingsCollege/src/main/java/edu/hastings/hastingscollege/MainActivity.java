@@ -170,13 +170,6 @@ public class MainActivity extends FragmentActivity {
                 return true;
             */
             case R.id.itemRefresh:
-                //int position = mDrawerList.getSelectedItemPosition();
-                Fragment newFragment = new FragmentHome();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_frame, newFragment);
-                        //        Fragment.instantiate(MainActivity.this, mFragments[position]));
-                transaction.addToBackStack(null);
-                transaction.commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
