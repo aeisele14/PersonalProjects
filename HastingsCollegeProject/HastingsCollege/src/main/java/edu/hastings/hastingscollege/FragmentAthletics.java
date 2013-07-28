@@ -30,8 +30,16 @@ public class FragmentAthletics extends Fragment {
         super.onActivityCreated(savedInstanceState);
         myWebView = (WebView) getView().findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new MyWebViewClient());
-        myWebView.loadUrl("http://www.hastingsbroncos.com/SIDHelp/m.php");
+        myWebView.setWebViewClient(new MyWebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                //hide loading image
+                getView().findViewById(R.id.athleticsProgress).setVisibility(View.GONE);
+                //Show webview
+                getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            }
+        });
+        myWebView.loadUrl(getString(R.string.athletics_url));
 
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,8 +31,16 @@ public class FragmentHome extends Fragment {
         super.onActivityCreated(savedInstanceState);
         myWebView = (WebView) getView().findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new MyWebViewClient());
-        myWebView.loadUrl("http://catchfiredevprojects.com/hastings/homepage.html#");
+        myWebView.setWebViewClient(new MyWebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                //hide loading image
+                getView().findViewById(R.id.homeProgress).setVisibility(View.GONE);
+                //Show webview
+                getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            }
+        });
+        myWebView.loadUrl(getString(R.string.home_url));
 
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override

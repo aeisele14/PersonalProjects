@@ -80,6 +80,7 @@ public class MainActivity extends FragmentActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mDrawerItems;
+    private String[] mFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public class MainActivity extends FragmentActivity {
 
         mTitle = mDrawerTitle = getTitle();
         mDrawerItems = getResources().getStringArray(R.array.drawer_items);
+        mFragments = getResources().getStringArray(R.array.fragment_items);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -140,7 +142,8 @@ public class MainActivity extends FragmentActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        menu.findItem(R.id.itemRefresh).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -153,6 +156,7 @@ public class MainActivity extends FragmentActivity {
         }
         // Handle action buttons
         switch(item.getItemId()) {
+            /*
             case R.id.action_websearch:
                 // create intent to perform web search for this item
                 Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
@@ -163,6 +167,16 @@ public class MainActivity extends FragmentActivity {
                 } else {
                     Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
                 }
+                return true;
+            */
+            case R.id.itemRefresh:
+                //int position = mDrawerList.getSelectedItemPosition();
+                Fragment newFragment = new FragmentHome();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_frame, newFragment);
+                        //        Fragment.instantiate(MainActivity.this, mFragments[position]));
+                transaction.addToBackStack(null);
+                transaction.commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -179,10 +193,9 @@ public class MainActivity extends FragmentActivity {
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        final String[] fragments = getResources().getStringArray(R.array.fragment_items);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, fragments[position])).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, mFragments[position])).commit();
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);

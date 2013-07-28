@@ -26,9 +26,11 @@
         <item>edu.hastings.hastingscollege.FragmentContacts</item>
         <item>edu.hastings.hastingscollege.FragmentAbout</item>
     </string-array>
+    <string name="home_url">http://catchfiredevprojects.com/hastings/homepage.html#</string>
+    <string name="athletics_url">http://www.hastingsbroncos.com/SIDHelp/m.php</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="action_websearch">Web search</string>
+    <string name="action_refresh">Refresh</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
 
 </resources>
