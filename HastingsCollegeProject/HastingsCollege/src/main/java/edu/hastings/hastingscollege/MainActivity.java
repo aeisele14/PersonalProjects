@@ -79,8 +79,11 @@ public class MainActivity extends FragmentActivity {
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+
     private String[] mDrawerItems;
     private String[] mFragments;
+
+    private int mFragPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +173,10 @@ public class MainActivity extends FragmentActivity {
                 return true;
             */
             case R.id.itemRefresh:
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, mFragments[mFragPosition]));
+                transaction.addToBackStack(null);
+                transaction.commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -186,6 +193,7 @@ public class MainActivity extends FragmentActivity {
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
+        mFragPosition = position;
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, mFragments[position])).commit();

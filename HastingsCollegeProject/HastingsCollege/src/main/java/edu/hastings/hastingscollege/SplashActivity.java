@@ -46,6 +46,10 @@ public class SplashActivity extends Activity {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             SplashActivity.this.startActivity(intent);
             SplashActivity.this.finish();
+
+            // transition from splash to main menu
+            overridePendingTransition(R.anim.fadein,
+                    R.anim.fadeout);
         }
     }
 }
