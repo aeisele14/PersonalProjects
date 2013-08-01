@@ -73,6 +73,16 @@ public class FragmentMap extends Fragment {
         }
     }
 
+    public void onDestroyView() {
+        super.onDestroyView();
+        try {
+            //Fragment fragment = (getChildFragmentManager().findFragmentById(R.id.map));
+            getChildFragmentManager().beginTransaction().remove(mMapFragment).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
