@@ -192,7 +192,10 @@ public class MainActivity extends FragmentActivity {
         mFragPosition = position;
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, mFragments[position])).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, mFragments[position]))
+                .addToBackStack(null)
+                .commit();
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);

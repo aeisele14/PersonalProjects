@@ -25,7 +25,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class FragmentMap extends Fragment {
 
-    static final LatLng HASTINGS = new LatLng(40.591713, -98.373454);
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
 
@@ -44,6 +43,7 @@ public class FragmentMap extends Fragment {
         if (mMap == null)
         {
             boolean connection = hasConnection(getActivity().getApplicationContext());
+            LatLng HASTINGS = new LatLng(40.591713, -98.373454);
 
             if (connection)
             {
@@ -91,6 +91,13 @@ public class FragmentMap extends Fragment {
             mMapFragment = SupportMapFragment.newInstance();
             getChildFragmentManager().beginTransaction().replace(R.id.map, mMapFragment).commit();
         }
+    }
+
+    public void addMapMarker(GoogleMap map, LatLng position, String title, String snippet) {
+        map.addMarker(new MarkerOptions()
+                .position(position)
+                .title(title)
+                .snippet(snippet));
     }
 
     public static boolean hasConnection(Context c) {

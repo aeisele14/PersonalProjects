@@ -89,23 +89,6 @@ public class FragmentAthletics extends Fragment {
         return root;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.itemRefresh:
-                myWebView.loadUrl(getString(R.string.athletics_url));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public static boolean hasConnection(Context c) {
         ConnectivityManager cm = (ConnectivityManager) c
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
