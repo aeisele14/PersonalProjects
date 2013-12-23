@@ -15,7 +15,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -43,7 +42,38 @@ public class FragmentMap extends Fragment {
         if (mMap == null)
         {
             boolean connection = hasConnection(getActivity().getApplicationContext());
-            LatLng HASTINGS = new LatLng(40.591713, -98.373454);
+            // Zoom Point
+            LatLng HASTINGS_CENTER = new LatLng(40.593413, -98.36964);
+
+            // Building locations
+            LatLng Kiewett = new LatLng(40.590561, -98.373438);
+            LatLng PerkinsLib = new LatLng(40.590246, -98.374471);
+            LatLng HurleyMac = new LatLng(40.5907, -98.374554);
+            LatLng MorrisonReeves = new LatLng(40.591074, -98.371947);
+            LatLng DaughteryCenter = new LatLng(40.591074, -98.373674);
+            LatLng Chapel = new LatLng(40.591628, -98.373567);
+            LatLng McCormick = new LatLng(40.592288, -98.373674);
+            LatLng ScottTheater = new LatLng(40.592321, -98.373299);
+            LatLng WilsonCenter = new LatLng(40.592688, -98.37346);
+            LatLng AltmanHall = new LatLng(40.592337, -98.372022);
+            LatLng TaylorHall = new LatLng(40.592631, -98.374629);
+            LatLng BabcockHall = new LatLng(40.593095, -98.374597);
+            LatLng BroncHall = new LatLng(40.593071, -98.372226);
+            LatLng WeyerHall = new LatLng(40.59391, -98.37184);
+            LatLng HSU = new LatLng(40.593869, -98.372966);
+            LatLng FuhrHall = new LatLng(40.594431, -98.371829);
+            LatLng GrayCenter = new LatLng(40.595596, -98.373063);
+            LatLng PFF = new LatLng(40.594625, -98.369629);
+            LatLng Fleharty = new LatLng(40.595839, -98.370638);
+            LatLng BarretAlum = new LatLng(40.595308, -98.364667);
+            LatLng BroncoVillApart = new LatLng(40.594408, -98.365992);
+            LatLng Maintenance = new LatLng(40.592653, -98.371067);
+            LatLng House710 = new LatLng(40.58967, -98.373127);
+            LatLng House714 = new LatLng(40.589703, -98.372692);
+            LatLng HouseMckay = new LatLng(40.593561, -98.374983);
+            LatLng PineKnoll1 = new LatLng(40.593558, -98.371051);
+            LatLng PineKnoll2 = new LatLng(40.593961, -98.371051);
+            //LatLng FootballField = new LatLng(1, 2);
 
             if (connection)
             {
@@ -52,16 +82,13 @@ public class FragmentMap extends Fragment {
                 if  (mMap != null) {
                     mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-
                     // Move the camera instantly to Hastings with a zoom of 15
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS, 15));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS_CENTER, 16));
                     // Zoom in, animating the camera.
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);
 
-                    // Set marker on Hastings
-                    mMap.addMarker(new MarkerOptions().position(HASTINGS)
-                            .title("Hastings College")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher)));
+                    // Set markers on Hastings College Campus
+                    //addMapMarker(Kiewett,);
                 }
             }
             else
@@ -93,8 +120,8 @@ public class FragmentMap extends Fragment {
         }
     }
 
-    public void addMapMarker(GoogleMap map, LatLng position, String title, String snippet) {
-        map.addMarker(new MarkerOptions()
+    public void addMapMarker(LatLng position, String title, String snippet) {
+        mMap.addMarker(new MarkerOptions()
                 .position(position)
                 .title(title)
                 .snippet(snippet));

@@ -52,6 +52,7 @@ public class FragmentAthletics extends Fragment {
                 }
             });
             myWebView.loadUrl(getString(R.string.athletics_url));
+            myWebView.getSettings().setBuiltInZoomControls(true);
 
             myWebView.setOnKeyListener(new View.OnKeyListener() {
                 @Override

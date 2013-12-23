@@ -1,6 +1,5 @@
 package edu.hastings.hastingscollege;
 
-
 /*
  * Copyright 2013 The Android Open Source Project
  *
@@ -17,18 +16,16 @@ package edu.hastings.hastingscollege;
  * limitations under the License.
  */
 
-import java.util.Locale;
+import android.support.v4.app.*;
+import android.util.Log;
+import edu.hastings.hastingscollege.model.NavDrawerItem;
+import edu.hastings.hastingscollege.adapter.NavDrawerListAdapter;
 
-import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentManager;
-import android.app.SearchManager;
-import android.content.Intent;
+import java.util.ArrayList;
+
+import android.content.res.TypedArray;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -36,7 +33,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
@@ -73,11 +69,17 @@ public class MainActivity extends FragmentActivity {
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    // nav drawer title
     private CharSequence mDrawerTitle;
+    // used to store app title
     private CharSequence mTitle;
 
-    private String[] mDrawerItems;
-    private String[] mFragments;
+    // slide menu items
+    private String[] navMenuTitles;
+    private TypedArray navMenuIcons;
+
+    private ArrayList<NavDrawerItem> navDrawerItems;
+    private NavDrawerListAdapter adapter;
 
     private int mFragPosition = 0;
 
@@ -87,17 +89,45 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         mTitle = mDrawerTitle = getTitle();
-        mDrawerItems = getResources().getStringArray(R.array.drawer_items);
-        mFragments = getResources().getStringArray(R.array.fragment_items);
+
+        // load slide menu items
+        navMenuTitles = getResources().getStringArray(R.array.drawer_items);
+
+        // nav drawer icons from resources
+        navMenuIcons = getResources().obtainTypedArray(R.array.drawer_icons);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
+        navDrawerItems = new ArrayList<NavDrawerItem>();
+
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mDrawerItems));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        // adding nav drawer items to array
+        // Home
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+        // Map
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(0, -1)));
+        // Sodexo
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(0, -1)));
+        // Media, Will add a counter here
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(1, -1), true, "22"));
+        // Event Calendar
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(0, -1)));
+        // Athletics, We  will add a counter here
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(0, -1), true, "50+"));
+        // Contacts
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(0, -1)));
+
+        // Recyle the typed array
+        navMenuIcons.recycle();
+
+        mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
+
+        // setting the nav drawer list adapter
+        adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
+        mDrawerList.setAdapter(adapter);
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -129,6 +159,19 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Slide menu item click listener
+     * */
+    private class SlideMenuClickListener implements
+            ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            // display view for selected nav drawer item
+            selectItem(position);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -148,59 +191,64 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
-        // ActionBarDrawerToggle will take care of this.
+        // toggle nav drawer on selecting action bar app icon/title
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        // Handle action buttons
-        switch(item.getItemId()) {
-            /*
-            case R.id.action_websearch:
-                // create intent to perform web search for this item
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-                // catch event that there's no activity to handle intent
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-                }
-                return true;
-            */
+        // Handle action bar actions click
+        switch (item.getItemId()) {
             case R.id.itemRefresh:
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, mFragments[mFragPosition]));
-                transaction.addToBackStack(null);
-                transaction.commit();
+                selectItem(mFragPosition);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
     private void selectItem(int position) {
-        // update the main content by replacing fragments
+        // update the main content frame by replacing fragments
+        Fragment fragment = null;
         mFragPosition = position;
+        switch (position) {
+            case 0:
+                fragment = new FragmentHome();
+                break;
+            case 1:
+                fragment = new FragmentMap();
+                break;
+            case 2:
+                fragment = new FragmentSodexo();
+                break;
+            case 3:
+                fragment = new FragmentMedia();
+                break;
+            case 4:
+                fragment = new FragmentEventCalendar();
+                break;
+            case 5:
+                fragment = new FragmentAthletics();
+                break;
+            case 6:
+                fragment = new FragmentContacts();
+                 break;
+            default:
+                break;
+        }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, Fragment.instantiate(MainActivity.this, mFragments[position]))
-                .addToBackStack(null)
-                .commit();
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment).commit();
 
-        // update selected item and title, then close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mDrawerItems[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerList.setSelection(position);
+            setTitle(navMenuTitles[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
+        } else {
+            // error in creating fragment
+            Log.e("MainActivity", "Error in creating fragment");
+        }
     }
 
     @Override

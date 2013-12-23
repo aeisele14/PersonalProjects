@@ -6,6 +6,8 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+
+    <!-- Nav Drawer Menu Items -->
     <string-array name="drawer_items">
         <item>Home</item>
         <item>Map</item>
@@ -14,20 +16,45 @@
         <item>Event Calendar</item>
         <item>Athletics</item>
         <item>Contacts</item>
-        <item>About</item>
     </string-array>
-    <string-array name="fragment_items">
-        <item>edu.hastings.hastingscollege.FragmentHome</item>
-        <item>edu.hastings.hastingscollege.FragmentMap</item>
-        <item>edu.hastings.hastingscollege.FragmentSodexo</item>
-        <item>edu.hastings.hastingscollege.FragmentMedia</item>
-        <item>edu.hastings.hastingscollege.FragmentEventCalendar</item>
-        <item>edu.hastings.hastingscollege.FragmentAthletics</item>
-        <item>edu.hastings.hastingscollege.FragmentContacts</item>
-        <item>edu.hastings.hastingscollege.FragmentAbout</item>
-    </string-array>
-    <string name="home_url">http://catchfiredevprojects.com/hastings/homepage.html#</string>
+
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_photos</item>
+    </array>
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <!-- Map Locations -->
+    <string name="map_kiewett">Kiewett</string>
+    <string name="map_perkins">Perkins Library</string>
+    <string name="map_hurleymac">Hurley Mac</string>
+    <string name="map_morrisonreeves">Morrison-Reeves</string>
+    <string name="map_daugherty">Daugherty Center</string>
+    <string name="map_chapel">French Memorial Chapel</string>
+    <string name="map_mccormick">McCormick</string>
+    <string name="map_theater">Scott Studio Theater</string>
+    <string name="map_wilson">Wilson Center</string>
+    <string name="map_altman">Altman Hall</string>
+    <string name="map_taylor">Taylor Hall</string>
+    <string name="map_babcock">Babcock Hall</string>
+    <string name="map_bronc">Bronc Hall</string>
+    <string name="map_weyer">Weyer Hall</string>
+    <string name="map_hsu">Hazelrigg Student Union</string>
+    <string name="map_fuhr">Fuhr Hall</string>
+    <string name="map_graycenter">Gray Center</string>
+    <string name="map_pff">Physical Fitness Facility</string>
+    <string name="map_fleharty">Fleharty</string>
+    <string name="map_alumnicenter">Barrett Alumni Center</string>
+    <string name="map_apartments">Bronco Village Apartments</string>
+
+    <!-- URLs -->
+    <string name="home_url">http://www.hastings.edu</string>
     <string name="athletics_url">http://www.hastingsbroncos.com/SIDHelp/m.php</string>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_refresh">Refresh</string>

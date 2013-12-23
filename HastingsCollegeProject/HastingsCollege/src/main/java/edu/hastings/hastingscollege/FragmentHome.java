@@ -25,9 +25,10 @@ import android.widget.Toast;
  */
 public class FragmentHome extends Fragment {
 
-    public static Fragment newInstance(Context context){
-        FragmentHome f = new FragmentHome();
-        return f;
+    public static final String TAG = FragmentHome.class.getSimpleName();
+
+    public static Fragment newInstance(){
+        return new FragmentHome();
     }
 
     WebView myWebView;
@@ -53,26 +54,27 @@ public class FragmentHome extends Fragment {
                 }
             });
             myWebView.loadUrl(getString(R.string.home_url));
+            myWebView.getSettings().setBuiltInZoomControls(true);
 
             myWebView.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View view, int i, KeyEvent event) {
-                    if (event.getAction() == KeyEvent.ACTION_DOWN)
-                    {
-                        WebView webView = (WebView) view;
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    WebView webView = (WebView) view;
 
-                        switch (i)
-                        {
-                            case KeyEvent.KEYCODE_BACK:
-                                if(webView.canGoBack())
-                                {
-                                    webView.goBack();
-                                    return true;
-                                }
-                                break;
-                        }
+                    switch (i)
+                    {
+                        case KeyEvent.KEYCODE_BACK:
+                            if(webView.canGoBack())
+                            {
+                                webView.goBack();
+                                return true;
+                            }
+                            break;
                     }
-                    return false;
+                }
+                return false;
                 }
             });
         }
