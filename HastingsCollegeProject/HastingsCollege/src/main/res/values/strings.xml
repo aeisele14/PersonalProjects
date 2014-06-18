@@ -3,15 +3,13 @@
 
     <string name="app_name">Hastings College</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="drawer_items">
         <item>Home</item>
         <item>Map</item>
         <item>Sodexo</item>
+        <item>BroncoBoard</item>
         <item>Media</item>
         <item>Event Calendar</item>
         <item>Athletics</item>
@@ -24,6 +22,11 @@
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_photos</item>
     </array>
+
+    <!-- Viewpager Tabs -->
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
@@ -54,6 +57,7 @@
     <!-- URLs -->
     <string name="home_url">http://www.hastings.edu</string>
     <string name="athletics_url">http://www.hastingsbroncos.com/SIDHelp/m.php</string>
+    <string name="broncoboard_url">http://broncoboard.hastings.edu/</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

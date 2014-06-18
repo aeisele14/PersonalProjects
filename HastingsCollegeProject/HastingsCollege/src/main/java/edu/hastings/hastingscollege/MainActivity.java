@@ -16,7 +16,10 @@ package edu.hastings.hastingscollege;
  * limitations under the License.
  */
 
-import android.support.v4.app.*;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import edu.hastings.hastingscollege.model.NavDrawerItem;
 import edu.hastings.hastingscollege.adapter.NavDrawerListAdapter;
@@ -111,14 +114,16 @@ public class MainActivity extends FragmentActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(0, -1)));
         // Sodexo
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(0, -1)));
-        // Media, Will add a counter here
+        // Broncoboard
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(1, -1), true, "22"));
-        // Event Calendar
+        // Media (will add count here)
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(0, -1)));
-        // Athletics, We  will add a counter here
+        // Event Calendar
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(0, -1), true, "50+"));
-        // Contacts
+        // Athletics
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(0, -1)));
+        // Contacts
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(0, -1)));
 
         // Recyle the typed array
         navMenuIcons.recycle();
@@ -220,15 +225,18 @@ public class MainActivity extends FragmentActivity {
                 fragment = new FragmentSodexo();
                 break;
             case 3:
-                fragment = new FragmentMedia();
+                fragment = new FragmentBroncoboard();
                 break;
             case 4:
-                fragment = new FragmentEventCalendar();
+                fragment = new FragmentMedia();
                 break;
             case 5:
-                fragment = new FragmentAthletics();
+                fragment = new FragmentEventCalendar();
                 break;
             case 6:
+                fragment = new FragmentAthletics();
+                break;
+            case 7:
                 fragment = new FragmentContacts();
                  break;
             default:

@@ -1,21 +1,14 @@
 package edu.hastings.hastingscollege;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -25,17 +18,21 @@ import android.widget.Toast;
  */
 public class FragmentHome extends Fragment {
 
-    public static final String TAG = FragmentHome.class.getSimpleName();
+    WebView myWebView;
 
     public static Fragment newInstance(){
         return new FragmentHome();
     }
 
-    WebView myWebView;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         boolean connection = hasConnection(getActivity()
                 .getApplicationContext());
@@ -88,7 +85,7 @@ public class FragmentHome extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.home, null);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.home, container, false);
         return root;
     }
 

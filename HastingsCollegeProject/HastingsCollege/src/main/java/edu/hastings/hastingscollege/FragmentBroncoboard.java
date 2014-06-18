@@ -13,12 +13,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class FragmentAthletics extends Fragment {
+/**
+ * Created by Alex on 2/25/14.
+ */
+public class FragmentBroncoboard extends Fragment {
 
     WebView myWebView;
 
     public static Fragment newInstance(Context context) {
-        FragmentAthletics f = new FragmentAthletics();
+        FragmentBroncoboard f = new FragmentBroncoboard();
         return f;
     }
 
@@ -33,36 +36,31 @@ public class FragmentAthletics extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         boolean connection = hasConnection(getActivity()
-                .getApplicationContext());
+            .getApplicationContext());
 
-        if (connection)
-        {
+        if (connection) {
             myWebView = (WebView) getView().findViewById(R.id.webview);
             myWebView.getSettings().setJavaScriptEnabled(true);
-            myWebView.setWebViewClient(new MyWebViewClient(){
+            myWebView.setWebViewClient(new MyWebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    //hide loading image
-                    getView().findViewById(R.id.athleticsProgress).setVisibility(View.GONE);
-                    //Show webview
+                    // hide loading image
+                    getView().findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
+                    // Show webview
                     getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
                 }
             });
-            myWebView.loadUrl(getString(R.string.athletics_url));
+            myWebView.loadUrl(getString(R.string.broncoboard_url));
             myWebView.getSettings().setBuiltInZoomControls(true);
 
             myWebView.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View view, int i, KeyEvent event) {
-                    if (event.getAction() == KeyEvent.ACTION_DOWN)
-                    {
+                    if (event.getAction() == KeyEvent.ACTION_DOWN) {
                         WebView webView = (WebView) view;
-
-                        switch (i)
-                        {
+                        switch (i) {
                             case KeyEvent.KEYCODE_BACK:
-                                if(webView.canGoBack())
-                                {
+                                if(webView.canGoBack()) {
                                     webView.goBack();
                                     return true;
                                 }
@@ -73,17 +71,16 @@ public class FragmentAthletics extends Fragment {
                 }
             });
         }
-        else
-        {
+        else {
             Toast.makeText(getActivity().getApplicationContext(),
-                "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
-                Toast.LENGTH_LONG).show();
+                    "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.athletics, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.broncoboard, container, false);
         return root;
     }
 
@@ -111,7 +108,7 @@ public class FragmentAthletics extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             //if (Uri.parse(url).getHost().equals("http://catchfiredevprojects.com/hastings/homepage.html#"))
-                return false;
+            return false;
             //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             //startActivity(intent);
             //return true;
