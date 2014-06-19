@@ -23,11 +23,6 @@
         <item>@drawable/ic_photos</item>
     </array>
 
-    <!-- Viewpager Tabs -->
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 
