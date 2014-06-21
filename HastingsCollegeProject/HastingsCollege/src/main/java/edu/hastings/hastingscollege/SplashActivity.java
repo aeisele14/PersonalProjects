@@ -1,8 +1,5 @@
 package edu.hastings.hastingscollege;
 
-/**
- * Created by Alex on 7/16/13.
- */
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

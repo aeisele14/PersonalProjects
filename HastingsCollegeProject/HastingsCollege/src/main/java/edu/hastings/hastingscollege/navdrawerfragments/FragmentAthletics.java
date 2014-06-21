@@ -1,8 +1,6 @@
 package edu.hastings.hastingscollege.navdrawerfragments;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -12,16 +10,14 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+import edu.hastings.hastingscollege.Connection;
 import edu.hastings.hastingscollege.R;
 
 public class FragmentAthletics extends Fragment {
 
     WebView myWebView;
 
-    public static Fragment newInstance(Context context) {
-        FragmentAthletics f = new FragmentAthletics();
-        return f;
-    }
+    public static Fragment newInstance(Context context) { return new FragmentAthletics(); }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,8 +29,7 @@ public class FragmentAthletics extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean connection = hasConnection(getActivity()
-                .getApplicationContext());
+        boolean connection = new Connection().hasConnection(getActivity());
 
         if (connection)
         {
@@ -76,7 +71,7 @@ public class FragmentAthletics extends Fragment {
         }
         else
         {
-            Toast.makeText(getActivity().getApplicationContext(),
+            Toast.makeText(getActivity(),
                 "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
                 Toast.LENGTH_LONG).show();
         }
@@ -86,26 +81,6 @@ public class FragmentAthletics extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.athletics, container, false);
         return root;
-    }
-
-    public static boolean hasConnection(Context c) {
-        ConnectivityManager cm = (ConnectivityManager) c
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo wifiNetwork = cm
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        if (wifiNetwork != null && wifiNetwork.isConnected()) {
-            return true;
-        }
-
-        NetworkInfo mobileNetwork = cm
-                .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if (mobileNetwork != null && mobileNetwork.isConnected()) {
-            return true;
-        }
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return (activeNetwork != null && activeNetwork.isConnected());
     }
 
     private class MyWebViewClient extends WebViewClient {

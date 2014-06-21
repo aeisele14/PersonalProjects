@@ -14,9 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by Alex on 12/22/13.
- */
 public class NavDrawerListAdapter extends BaseAdapter {
 
     private Context context;
