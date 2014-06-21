@@ -9,6 +9,11 @@ import edu.hastings.hastingscollege.tabfragments.LunchFragment;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
+    // Number of Viewpager pages
+    final int PAGE_COUNT = 3;
+    // Tab titles
+    private static final String[] tabsTitles = { "Breakfast", "Lunch", "Dinner"  };
+
     public TabsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -26,8 +31,12 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
+    public CharSequence getPageTitle(int position) {
+        return tabsTitles[position];
+    }
+
     @Override
     public int getCount() {
-        return 3;
+        return PAGE_COUNT;
     }
 }
