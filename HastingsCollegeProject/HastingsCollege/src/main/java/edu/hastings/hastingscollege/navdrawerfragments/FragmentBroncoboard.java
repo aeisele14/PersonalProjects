@@ -17,7 +17,9 @@ public class FragmentBroncoboard extends Fragment {
 
     WebView myWebView;
 
-    public static Fragment newInstance(Context context) { return new FragmentBroncoboard(); }
+    public static Fragment newInstance(Context context) {
+        return new FragmentBroncoboard();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,50 +31,42 @@ public class FragmentBroncoboard extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean connection = new Connection().hasConnection(getActivity());
+        myWebView = (WebView) getView().findViewById(R.id.webview);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.setWebViewClient(new MyWebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // hide loading image
+                getView().findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
+                // Show webview
+                getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            }
+        });
+        myWebView.loadUrl(getString(R.string.broncoboard_url));
+        myWebView.getSettings().setBuiltInZoomControls(true);
 
-        if (connection) {
-            myWebView = (WebView) getView().findViewById(R.id.webview);
-            myWebView.getSettings().setJavaScriptEnabled(true);
-            myWebView.setWebViewClient(new MyWebViewClient() {
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    // hide loading image
-                    getView().findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
-                    // Show webview
-                    getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
-                }
-            });
-            myWebView.loadUrl(getString(R.string.broncoboard_url));
-            myWebView.getSettings().setBuiltInZoomControls(true);
-
-            myWebView.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View view, int i, KeyEvent event) {
-                    if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                        WebView webView = (WebView) view;
-                        switch (i) {
-                            case KeyEvent.KEYCODE_BACK:
-                                if(webView.canGoBack()) {
-                                    webView.goBack();
-                                    return true;
-                                }
-                                break;
-                        }
+        myWebView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    WebView webView = (WebView) view;
+                    switch (i) {
+                        case KeyEvent.KEYCODE_BACK:
+                            if (webView.canGoBack()) {
+                                webView.goBack();
+                                return true;
+                            }
+                            break;
                     }
-                    return false;
                 }
-            });
-        }
-        else {
-            Toast.makeText(getActivity(),
-                    "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
-                    Toast.LENGTH_LONG).show();
-        }
+                return false;
+            }
+        });
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return (ViewGroup) inflater.inflate(R.layout.broncoboard, container, false);
     }
 

@@ -26,28 +26,15 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
 
-    <!-- Map Locations -->
-    <string name="map_kiewett">Kiewett</string>
-    <string name="map_perkins">Perkins Library</string>
-    <string name="map_hurleymac">Hurley Mac</string>
-    <string name="map_morrisonreeves">Morrison-Reeves</string>
-    <string name="map_daugherty">Daugherty Center</string>
-    <string name="map_chapel">French Memorial Chapel</string>
-    <string name="map_mccormick">McCormick</string>
-    <string name="map_theater">Scott Studio Theater</string>
-    <string name="map_wilson">Wilson Center</string>
-    <string name="map_altman">Altman Hall</string>
-    <string name="map_taylor">Taylor Hall</string>
-    <string name="map_babcock">Babcock Hall</string>
-    <string name="map_bronc">Bronc Hall</string>
-    <string name="map_weyer">Weyer Hall</string>
-    <string name="map_hsu">Hazelrigg Student Union</string>
-    <string name="map_fuhr">Fuhr Hall</string>
-    <string name="map_graycenter">Gray Center</string>
-    <string name="map_pff">Physical Fitness Facility</string>
-    <string name="map_fleharty">Fleharty</string>
-    <string name="map_alumnicenter">Barrett Alumni Center</string>
-    <string name="map_apartments">Bronco Village Apartments</string>
+    <!--  Menu items -->
+    <string name="settings">Settings</string>
+    <string name="refresh">Refresh</string>
+
+    <!--  NetworkActivity -->
+    <string name="lost_connection">Lost connection.</string>
+    <string name="wifi_connected">Wi-Fi reconnected.</string>
+    <string name="connection_error">Unable to load content. Check your network connection.</string>
+    <string name="xml_error">Error parsing XML.</string>
 
     <!-- URLs -->
     <string name="home_url">http://www.hastings.edu</string>

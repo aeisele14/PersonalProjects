@@ -2,12 +2,13 @@ package edu.hastings.hastingscollege.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+
 import edu.hastings.hastingscollege.tabfragments.BreakfastFragment;
 import edu.hastings.hastingscollege.tabfragments.DinnerFragment;
 import edu.hastings.hastingscollege.tabfragments.LunchFragment;
 
-public class TabsPagerAdapter extends FragmentPagerAdapter {
+public class TabsPagerAdapter extends FragmentStatePagerAdapter {
 
     // Number of Viewpager pages
     final int PAGE_COUNT = 3;

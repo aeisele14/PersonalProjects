@@ -29,59 +29,53 @@ public class FragmentMap extends Fragment {
     private SupportMapFragment mMapFragment;
     private SQLiteDatabase mDB;
 
-    public FragmentMap(){
+    public FragmentMap() {
         // Empty constructor required for fragment subclasses
     }
 
-    public static Fragment newInstance(Context context) { return new FragmentMap(); }
+    public static Fragment newInstance(Context context) {
+        return new FragmentMap();
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mMap == null)
-        {
-            boolean connection = new Connection().hasConnection(getActivity());
+        if (mMap == null) {
             // Zoom Point
             final LatLng HASTINGS_CENTER = new LatLng(40.593413, -98.36964);
+            mMap = mMapFragment.getMap();
+            LocationsDB locationsDB = null;
+            try {
+                locationsDB = new LocationsDB(getActivity());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mDB = locationsDB.getReadableDatabase();
+            Cursor cursor = locationsDB.getData(mDB);
 
-            if (connection)
-            {
-                mMap = mMapFragment.getMap();
-                LocationsDB locationsDB = null;
-                try {
-                    locationsDB = new LocationsDB(getActivity());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mDB = locationsDB.getReadableDatabase();
-                Cursor cursor = locationsDB.getData(mDB);
+            int columns = cursor.getCount();
 
-                int columns = cursor.getCount();
+            if (mMap != null) {
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-                if  (mMap != null) {
-                    mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-                    if (columns == 0)
-                        Toast.makeText(getActivity(), "No Data",
+                if (columns == 0)
+                    Toast.makeText(getActivity(), "No Data",
                             Toast.LENGTH_LONG).show();
-                    else {
-                        addMapMarkerFromDB(cursor);
-                    }
-                    cursor.close();
-                    mDB.close();
-
-                    // Move the camera instantly to Hastings with a zoom of 15
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS_CENTER, 15));
-                    // Zoom in, animating the camera.
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                else {
+                    addMapMarkerFromDB(cursor);
                 }
+                cursor.close();
+                mDB.close();
+
+                // Move the camera instantly to Hastings with a zoom of 15
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS_CENTER, 15));
+                // Zoom in, animating the camera.
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
             }
-            else
-            {
-                Toast.makeText(getActivity(),
-                        "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
-                        Toast.LENGTH_LONG).show();
-            }
+        } else {
+            Toast.makeText(getActivity(),
+                    "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -92,10 +86,10 @@ public class FragmentMap extends Fragment {
             String longitude = cursor.getString(2);
             String title = cursor.getString(3);
             final String snippet = cursor.getString(4);
-            mMap.addMarker( new MarkerOptions()
-                .position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)))
-                .title(title)
-                .snippet(snippet));
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)))
+                    .title(title)
+                    .snippet(snippet));
             cursor.moveToNext();
         }
     }
@@ -114,7 +108,7 @@ public class FragmentMap extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mMapFragment == null){
+        if (mMapFragment == null) {
             mMapFragment = SupportMapFragment.newInstance();
             getChildFragmentManager().beginTransaction().replace(R.id.map, mMapFragment).commit();
         }
@@ -123,7 +117,8 @@ public class FragmentMap extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return (ViewGroup) inflater.inflate(R.layout.map, null); }
+        return (ViewGroup) inflater.inflate(R.layout.map, null);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,7 +126,7 @@ public class FragmentMap extends Fragment {
 
         try {
             MapsInitializer.initialize(this.getActivity());
-        } catch (GooglePlayServicesNotAvailableException e){
+        } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
     }

@@ -16,7 +16,7 @@ public class FragmentHome extends Fragment {
 
     WebView myWebView;
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         return new FragmentHome();
     }
 
@@ -29,37 +29,29 @@ public class FragmentHome extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        myWebView = (WebView) getView().findViewById(R.id.webview);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.setWebViewClient(new MyWebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                //hide loading image
+                getView().findViewById(R.id.homeProgress).setVisibility(View.GONE);
+                //Show webview
+                getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            }
+        });
+        myWebView.loadUrl(getString(R.string.home_url));
+        myWebView.getSettings().setBuiltInZoomControls(true);
 
-        boolean connection = new Connection().hasConnection(getActivity());
-
-        if (connection)
-        {
-            myWebView = (WebView) getView().findViewById(R.id.webview);
-            myWebView.getSettings().setJavaScriptEnabled(true);
-            myWebView.setWebViewClient(new MyWebViewClient(){
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    //hide loading image
-                    getView().findViewById(R.id.homeProgress).setVisibility(View.GONE);
-                    //Show webview
-                    getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
-                }
-            });
-            myWebView.loadUrl(getString(R.string.home_url));
-            myWebView.getSettings().setBuiltInZoomControls(true);
-
-            myWebView.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View view, int i, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN)
-                {
+        myWebView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     WebView webView = (WebView) view;
 
-                    switch (i)
-                    {
+                    switch (i) {
                         case KeyEvent.KEYCODE_BACK:
-                            if(webView.canGoBack())
-                            {
+                            if (webView.canGoBack()) {
                                 webView.goBack();
                                 return true;
                             }
@@ -67,16 +59,10 @@ public class FragmentHome extends Fragment {
                     }
                 }
                 return false;
-                }
-            });
-        }
-        else
-        {
-            Toast.makeText(getActivity(),
-                    "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
-                    Toast.LENGTH_LONG).show();
-        }
+            }
+        });
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,7 +73,7 @@ public class FragmentHome extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             //if (Uri.parse(url).getHost().equals("http://catchfiredevprojects.com/hastings/homepage.html#"))
-                return false;
+            return false;
             //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             //startActivity(intent);
             //return true;
