@@ -22,34 +22,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: edu.hastings.hastingscollege" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8384a55c-bdb4-44fe-a017-28f17c1cad6c" name="Default" comment="Added xml parsing and display parsed data in list view under sodex fragment. Network connectivity check refactor.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/assets/Menu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/SettingsActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/SodexoXmlParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/values/arrays.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/list_item_schedule_header.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/list_item_sodexo.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/menu/mainmenu.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/xml/preferences.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/tabfragments/BreakfastFragment.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/tabfragments/BreakfastFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/tabfragments/DinnerFragment.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/tabfragments/DinnerFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentBroncoboard.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentBroncoboard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentHome.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentHome.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentMap.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentSodexo.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentSodexo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/HastingsCollege.iml" afterPath="$PROJECT_DIR$/HastingsCollege/HastingsCollege.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollegeProject.iml" afterPath="$PROJECT_DIR$/HastingsCollegeProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/tabfragments/LunchFragment.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/tabfragments/LunchFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/MainActivity.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/adapter/TabsPagerAdapter.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/adapter/TabsPagerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GooglePlayServices/build.gradle" afterPath="$PROJECT_DIR$/GooglePlayServices/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/build.gradle" afterPath="$PROJECT_DIR$/HastingsCollege/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/fragment_breakfast.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/fragment_breakfast.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/fragment_dinner.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/fragment_dinner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/fragment_lunch.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/fragment_lunch.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/menu/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/values/strings.xml" />
+    <list default="true" id="8384a55c-bdb4-44fe-a017-28f17c1cad6c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HastingsCollege.iws" />
@@ -112,22 +85,7 @@
     <favorites_list name="HastingsCollege" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="FragmentAthletics.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentAthletics.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6136364" vertical-offset="811" max-vertical-offset="1411">
-              <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#519#520#0" expanded="true" />
-                <element signature="e#565#566#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -1332,226 +1290,6 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hastingscollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hastingscollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tabfragments" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollegeProject" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HastingsCollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hastingscollege" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="navdrawerfragments" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -1815,15 +1553,19 @@
       <created>1404185914080</created>
       <updated>1404185914080</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added xml parsing and display parsed data in list view under sodex fragment. Network connectivity check refactor.">
+      <created>1404186031689</created>
+      <updated>1404186031689</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="56" y="-8" width="1318" height="784" extended-state="6" />
+    <frame x="56" y="-8" width="1318" height="784" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32484075" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32484075" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.272655" sideWeight="0.5964912" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1842,7 +1584,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20111288" sideWeight="0.5717647" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20111288" sideWeight="0.5717647" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32165605" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -2330,7 +2072,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentAthletics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6136364" vertical-offset="811" max-vertical-offset="1411">
+        <state vertical-scroll-proportion="0.915" vertical-offset="505" max-vertical-offset="1411">
           <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
