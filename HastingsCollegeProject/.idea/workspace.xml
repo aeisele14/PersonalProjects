@@ -24,11 +24,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: edu.hastings.hastingscollege" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8384a55c-bdb4-44fe-a017-28f17c1cad6c" name="Default" comment="Removed icons from nav drawer. Changed app icon. Re-arranged webview code for readability, and implemented twitter view">
-      <change type="DELETED" beforePath="C:\Users\Alex\Google Drive\CS\GitHub\PersonalProjects\HastingsCollegeProject\HastingsCollege\src\main\res\drawable-xxhdpi\about_information_android.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentAbout.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentAbout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/about.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/about.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/values/strings.xml" />
+    <list default="true" id="8384a55c-bdb4-44fe-a017-28f17c1cad6c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HastingsCollege.iws" />
@@ -2248,7 +2244,11 @@
       <created>1404681407829</created>
       <updated>1404681407829</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Changed About to load image from web&#10;">
+      <created>1404686971905</created>
+      <updated>1404686971905</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2339,7 +2339,8 @@
     <MESSAGE value="Added map pins using data from sqlite3 db. Refactored connection check  to class" />
     <MESSAGE value="Added xml parsing and display parsed data in list view under sodex fragment. Network connectivity check refactor." />
     <MESSAGE value="Removed icons from nav drawer. Changed app icon. Re-arranged webview code for readability, and implemented twitter view" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed icons from nav drawer. Changed app icon. Re-arranged webview code for readability, and implemented twitter view" />
+    <MESSAGE value="Changed About to load image from web&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed About to load image from web&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
