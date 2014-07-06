@@ -33,15 +33,7 @@ public class FragmentBroncoboard extends Fragment {
 
         myWebView = (WebView) getView().findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new MyWebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                // hide loading image
-                getView().findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
-                // Show webview
-                getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
-            }
-        });
+        myWebView.setWebViewClient(new MyWebViewClient());
         myWebView.loadUrl(getString(R.string.broncoboard_url));
         myWebView.getSettings().setBuiltInZoomControls(true);
 
@@ -73,11 +65,15 @@ public class FragmentBroncoboard extends Fragment {
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            //if (Uri.parse(url).getHost().equals("http://catchfiredevprojects.com/hastings/homepage.html#"))
             return false;
-            //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            //startActivity(intent);
-            //return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            // hide loading image
+            getView().findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
+            // Show webview
+            getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
         }
     }
 }

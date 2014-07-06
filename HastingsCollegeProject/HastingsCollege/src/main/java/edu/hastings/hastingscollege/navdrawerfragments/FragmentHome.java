@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
-import edu.hastings.hastingscollege.Connection;
+
 import edu.hastings.hastingscollege.R;
 
 public class FragmentHome extends Fragment {
@@ -31,18 +30,9 @@ public class FragmentHome extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myWebView = (WebView) getView().findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new MyWebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                //hide loading image
-                getView().findViewById(R.id.homeProgress).setVisibility(View.GONE);
-                //Show webview
-                getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
-            }
-        });
-        myWebView.loadUrl(getString(R.string.home_url));
         myWebView.getSettings().setBuiltInZoomControls(true);
-
+        myWebView.setWebViewClient(new MyWebViewClient());
+        myWebView.loadUrl(getString(R.string.home_url));
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent event) {
@@ -63,7 +53,6 @@ public class FragmentHome extends Fragment {
         });
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return (ViewGroup) inflater.inflate(R.layout.home, container, false);
@@ -72,11 +61,15 @@ public class FragmentHome extends Fragment {
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            //if (Uri.parse(url).getHost().equals("http://catchfiredevprojects.com/hastings/homepage.html#"))
             return false;
-            //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            //startActivity(intent);
-            //return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            //hide loading image
+            getView().findViewById(R.id.homeProgress).setVisibility(View.GONE);
+            //Show webview
+            getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
         }
     }
 }

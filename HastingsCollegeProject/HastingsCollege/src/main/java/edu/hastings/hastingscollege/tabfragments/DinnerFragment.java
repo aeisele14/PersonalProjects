@@ -1,31 +1,23 @@
 package edu.hastings.hastingscollege.tabfragments;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.hastings.hastingscollege.Data;
 import edu.hastings.hastingscollege.R;
-import edu.hastings.hastingscollege.SodexoXmlParser;
 
-/**
- * Created by Alex on 6/18/2014.
- */
 public class DinnerFragment extends Fragment {
 
     final String KEY_ITEM_DATE = "menudate";
@@ -33,22 +25,68 @@ public class DinnerFragment extends Fragment {
     final String KEY_MEAL = "meal";
     final String KEY_ITEM_NAME = "item_name";
     final String KEY_ITEM_DESC = "item_desc";
-    final String URI = "";
-
-    private ListView mListView;
+    final String KEY_CALORIES = "calories";
+    final String KEY_FAT = "fat";
+    final String KEY_SAT_FAT = "satfat";
+    final String KEY_SODIUM = "sodium";
+    final String KEY_CARBO = "carbo";
+    final String KEY_SUGARS = "sugars";
+    final String KEY_PROTEIN = "protein";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_dinner, container, false);
-        mListView = (ListView) rootView.findViewById(R.id.dinnerList);
+        ListView mListView = (ListView) rootView.findViewById(R.id.dinnerList);
+        TextView txtHeaderText = (TextView) rootView.findViewById(R.id.list_item_menu_header_textview);
 
-        new DownloadXmlTask().execute(URI);
+        final List<HashMap<String, String>> dinnerMenuItems = getDinnerItems(Data.globalMenuItems);
+        String[] from = { KEY_ITEM_NAME, KEY_ITEM_DESC };
+        int[] to = {R.id.item_name, R.id.item_desc};
+        HashMap<String, String> dinnerItem = dinnerMenuItems.get(0);
+        String headerText = dinnerItem.get(KEY_DAY) + " " + dinnerItem.get(KEY_ITEM_DATE) + "%n" +
+                getResources().getString(R.string.sodexo_dinner_times);
+        headerText = String.format(headerText);
+
+        txtHeaderText.setText(headerText);
+
+        SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(),
+                dinnerMenuItems,
+                R.layout.list_item_sodexo,
+                from,
+                to);
+
+        mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemName = dinnerMenuItems.get(position).get(KEY_ITEM_NAME);
+                String calories = dinnerMenuItems.get(position).get(KEY_CALORIES);
+                String fat = dinnerMenuItems.get(position).get(KEY_FAT);
+                String satFat = dinnerMenuItems.get(position).get(KEY_SAT_FAT);
+                String sodium = dinnerMenuItems.get(position).get(KEY_SODIUM);
+                String carbo = dinnerMenuItems.get(position).get(KEY_CARBO);
+                String sugars = dinnerMenuItems.get(position).get(KEY_SUGARS);
+                String protein = dinnerMenuItems.get(position).get(KEY_PROTEIN);
+
+                Intent in = new Intent(getActivity(), SingleMenuItemNutritionFactsActivity.class);
+                in.putExtra(KEY_ITEM_NAME, itemName);
+                in.putExtra(KEY_CALORIES, calories);
+                in.putExtra(KEY_FAT, fat);
+                in.putExtra(KEY_SAT_FAT, satFat);
+                in.putExtra(KEY_SODIUM, sodium);
+                in.putExtra(KEY_CARBO, carbo);
+                in.putExtra(KEY_SUGARS, sugars);
+                in.putExtra(KEY_PROTEIN, protein);
+                startActivity(in);
+            }
+        });
         return rootView;
     }
 
-    private List<HashMap<String, String>> getLunchItems(List<HashMap<String, String>> menuItems) {
+    private List<HashMap<String, String>> getDinnerItems(List<HashMap<String, String>> menuItems) {
         List<HashMap<String, String>> lunchItems = new ArrayList<HashMap<String, String>>();
 
         for (HashMap<String, String> menuItem : menuItems) {
@@ -57,68 +95,5 @@ public class DinnerFragment extends Fragment {
             }
         }
         return lunchItems;
-    }
-
-    // Given a string representation of a URL, sets up a connection and gets
-    // an input stream.
-    private InputStream downloadUrl(String urlString) throws IOException {
-        URL url = new URL(urlString);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(10000 /* milliseconds */);
-        conn.setConnectTimeout(15000 /* milliseconds */);
-        conn.setRequestMethod("GET");
-        conn.setDoInput(true);
-        // Starts the query
-        conn.connect();
-        InputStream stream = conn.getInputStream();
-        return stream;
-    }
-
-    // Implementation of AsyncTask used to download XML feed
-    private class DownloadXmlTask extends AsyncTask<String, Void, List<HashMap<String, String>>> {
-
-        @Override
-        protected List<HashMap<String, String>> doInBackground(String... urls) {
-            InputStream stream = null;
-            SodexoXmlParser sodexoXmlParser = new SodexoXmlParser();
-            List<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
-            try {
-                try {
-                    //stream = downloadUrl(urls[0]);
-                    stream = getActivity().getAssets().open("Menu.xml");
-                    menuItems = sodexoXmlParser.parse(stream);
-                    // Makes sure that the InputStream is closed after the app is
-                    // finished using it.
-                } finally {
-                    if (stream != null) {
-                        stream.close();
-                    }
-                }
-            } catch (IOException e) {
-                // return getResources().getString(R.string.connection_error)
-                Log.d("IOException", e.toString());
-            } catch (XmlPullParserException e) {
-                //return getResources().getString(R.string.xml_error);
-                Log.d("XmlPullParserException", e.toString());
-            }
-
-            return menuItems;
-        }
-
-        @Override
-        protected void onPostExecute(List<HashMap<String, String>> menuItems) {
-            super.onPostExecute(menuItems);
-
-            String[] from = { KEY_ITEM_NAME, KEY_ITEM_DESC };
-            int[] to = {R.id.item_name, R.id.item_desc};
-
-            SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(),
-                    getLunchItems(menuItems),
-                    R.layout.list_item_sodexo,
-                    from,
-                    to);
-
-            mListView.setAdapter(adapter);
-        }
     }
 }

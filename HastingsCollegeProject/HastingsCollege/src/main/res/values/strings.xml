@@ -10,18 +10,12 @@
         <item>Map</item>
         <item>Sodexo</item>
         <item>BroncoBoard</item>
-        <item>Media</item>
+        <item>Twitter</item>
         <item>Event Calendar</item>
         <item>Athletics</item>
         <item>Contacts</item>
+        <item>About</item>
     </string-array>
-
-    <!-- Nav Drawer List Item Icons -->
-    <!-- Keep them in order as the titles are in -->
-    <array name="drawer_icons">
-        <item>@drawable/ic_home</item>
-        <item>@drawable/ic_photos</item>
-    </array>
 
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
@@ -32,17 +26,25 @@
 
     <!--  NetworkActivity -->
     <string name="lost_connection">Lost connection.</string>
-    <string name="wifi_connected">Wi-Fi reconnected.</string>
+    <string name="wifi_connected">Wi-Fi connected.</string>
     <string name="connection_error">Unable to load content. Check your network connection.</string>
     <string name="xml_error">Error parsing XML.</string>
 
     <!-- URLs -->
     <string name="home_url">http://www.hastings.edu</string>
     <string name="athletics_url">http://www.hastingsbroncos.com/SIDHelp/m.php</string>
-    <string name="broncoboard_url">http://broncoboard.hastings.edu/</string>
+    <string name="broncoboard_url">http://broncoboard.hastings.edu/login/index.php/</string>
+    <string name="twitter_base_uri">http://mobile.twitter.com/HC_Advantage</string>
 
+    <!-- Nav Drawer -->
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_refresh">Refresh</string>
 
+    <!-- Sodexo Dining Hall Times -->
+    <string name="sodexo_breakfast_times" formatted="false">Monday - Friday: 7:00 a.m. - 9:30 a.m.%nSaturday - Sunday: 11:30 a.m. - 1:00 p.m.</string>
+
+    <string name="sodexo_lunch_times" formatted="false">Monday - Friday: 11:15 a.m. - 1:15 p.m.%nSaturday - Sunday: 11:30 a.m. - 1:00 p.m.</string>
+
+    <string name="sodexo_dinner_times" formatted="false">Monday - Friday: 5:15 p.m. - 7:15 p.m.%nSaturday: 5:15 p.m. - 6:15 p.m.%nSunday: 5:15 p.m. - 7:00 p.m.</string>
 </resources>

@@ -18,8 +18,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import edu.hastings.hastingscollege.navdrawerfragments.FragmentSodexo;
-import edu.hastings.hastingscollege.tabfragments.BreakfastFragment;
 
 /**
  * This preference activity has in its manifest declaration an intent filter for

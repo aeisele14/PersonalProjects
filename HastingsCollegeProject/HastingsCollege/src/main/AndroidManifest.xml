@@ -45,6 +45,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="Nutrition Facts"
+            android:name=".tabfragments.SingleMenuItemNutritionFactsActivity" >
+        </activity>
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value="AIzaSyDkJc5_I90yt4LaErhLI7FeSNkvzQfIHIE"/>

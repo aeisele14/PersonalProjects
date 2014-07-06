@@ -12,13 +12,15 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:paddingTop="6dip"
-            android:paddingBottom="2dip" />
+            android:paddingBottom="2dip"
+            android:paddingLeft="6dp"/>
         <!-- Description label -->
         <TextView
             android:id="@+id/item_desc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#ff2e2e2e"
-            android:paddingBottom="2dip">
+            android:paddingBottom="2dip"
+            android:paddingLeft="6dp">
         </TextView>
 </LinearLayout>

@@ -7,18 +7,19 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import edu.hastings.hastingscollege.R;
 
-public class FragmentAthletics extends Fragment {
+public class FragmentTwitter extends Fragment{
+
+    public static final String TAG = "FragmentTwitter";
+
+    public static Fragment newInstance(Context context) { return new FragmentTwitter(); }
 
     WebView myWebView;
-
-    public static Fragment newInstance(Context context) {
-        return new FragmentAthletics();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,12 @@ public class FragmentAthletics extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myWebView = (WebView) getView().findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.setWebViewClient(new MyWebViewClient());
-        myWebView.loadUrl(getString(R.string.athletics_url));
         myWebView.getSettings().setBuiltInZoomControls(true);
-
+        myWebView.setWebViewClient(new MyWebViewClient());
+        myWebView.loadUrl(getString(R.string.twitter_base_uri));
+        myWebView.loadUrl("javascript:(function() { " +
+                        "document.getElementById('brand_bar').style.display='none'; " +
+                        "})()");
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent event) {
@@ -55,11 +58,9 @@ public class FragmentAthletics extends Fragment {
         });
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.athletics, container, false);
-        return root;
+        return (ViewGroup) inflater.inflate(R.layout.twitter, container, false);
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -71,7 +72,7 @@ public class FragmentAthletics extends Fragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             //hide loading image
-            getView().findViewById(R.id.athleticsProgress).setVisibility(View.GONE);
+            getView().findViewById(R.id.twitterProgress).setVisibility(View.GONE);
             //Show webview
             getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
         }

@@ -16,12 +16,14 @@ package edu.hastings.hastingscollege;
  * limitations under the License.
  */
 
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -36,21 +38,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import edu.hastings.hastingscollege.adapter.NavDrawerListAdapter;
-import edu.hastings.hastingscollege.model.NavDrawerItem;
-import edu.hastings.hastingscollege.navdrawerfragments.*;
-import edu.hastings.hastingscollege.tabfragments.BreakfastFragment;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentAbout;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentAthletics;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentBroncoboard;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentContacts;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentEventCalendar;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentHome;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentMap;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentSodexo;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentTwitter;
 
 public class MainActivity extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
@@ -64,10 +64,6 @@ public class MainActivity extends FragmentActivity {
 
     // slide menu items
     private String[] navMenuTitles;
-    private TypedArray navMenuIcons;
-
-    private ArrayList<NavDrawerItem> navDrawerItems;
-    private NavDrawerListAdapter adapter;
 
     private int mFragPosition = 0;
 
@@ -94,43 +90,15 @@ public class MainActivity extends FragmentActivity {
         // load slide menu items
         navMenuTitles = getResources().getStringArray(R.array.drawer_items);
 
-        // nav drawer icons from resources
-        navMenuIcons = getResources().obtainTypedArray(R.array.drawer_icons);
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        navDrawerItems = new ArrayList<NavDrawerItem>();
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
-        // adding nav drawer items to array
-        // Home
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-        // Map
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(0, -1)));
-        // Sodexo
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(0, -1)));
-        // Broncoboard
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(1, -1), true, "22"));
-        // Media (will add count here)
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(0, -1)));
-        // Event Calendar
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(0, -1), true, "50+"));
-        // Athletics
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(0, -1)));
-        // Contacts
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(0, -1)));
-
-        // Recyle the typed array
-        navMenuIcons.recycle();
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, navMenuTitles));
 
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
-
-        // setting the nav drawer list adapter
-        adapter = new NavDrawerListAdapter(getApplicationContext(), navDrawerItems);
-        mDrawerList.setAdapter(adapter);
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -266,7 +234,7 @@ public class MainActivity extends FragmentActivity {
                 fragment = new FragmentBroncoboard();
                 break;
             case 4:
-                fragment = new FragmentMedia();
+                fragment = new FragmentTwitter();
                 break;
             case 5:
                 fragment = new FragmentEventCalendar();
@@ -277,6 +245,8 @@ public class MainActivity extends FragmentActivity {
             case 7:
                 fragment = new FragmentContacts();
                  break;
+            case 8:
+                fragment = new FragmentAbout();
             default:
                 break;
         }
@@ -340,7 +310,7 @@ public class MainActivity extends FragmentActivity {
     private void loadApp() {
         if (((sPref.equals(ANY)) && (wifiConnected || mobileConnected))
                 || ((sPref.equals(WIFI)) && (wifiConnected))) {
-            //Do nothing, continue loading
+
         } else {
             showError();
         }
