@@ -35,6 +35,7 @@
     <string name="athletics_url">http://www.hastingsbroncos.com/SIDHelp/m.php</string>
     <string name="broncoboard_url">http://broncoboard.hastings.edu/login/index.php/</string>
     <string name="twitter_base_uri">http://mobile.twitter.com/HC_Advantage</string>
+    <string name="about_image_url">http://i.imgur.com/x7PpVWx.png</string>
 
     <!-- Nav Drawer -->
     <string name="drawer_open">Open navigation drawer</string>
