@@ -22,4 +22,10 @@
         android:defaultValue="true"
         android:summary="Push notifications from Student Association"
         android:key="notificationsPref" />
+    <CheckBoxPreference
+        android:id="@+id/isSplashEnabled"
+        android:key="isSplashEnabled"
+        android:title="Splash screen enabled"
+        android:summary="Select to enable the splash screen on application startup"
+        android:defaultValue="true"/>
 </PreferenceScreen>
