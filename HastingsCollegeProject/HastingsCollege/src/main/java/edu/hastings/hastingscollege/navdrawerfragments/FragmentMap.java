@@ -71,6 +71,8 @@ public class FragmentMap extends Fragment {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS_CENTER, 15));
                 // Zoom in, animating the camera.
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setMyLocationButtonEnabled(true);
             }
         } else {
             Toast.makeText(getActivity(),

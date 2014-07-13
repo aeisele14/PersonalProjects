@@ -14,6 +14,7 @@ import edu.hastings.hastingscollege.R;
 public class FragmentHome extends Fragment {
 
     WebView myWebView;
+    ViewGroup mRootView;
 
     public static Fragment newInstance() {
         return new FragmentHome();
@@ -28,7 +29,7 @@ public class FragmentHome extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myWebView = (WebView) getView().findViewById(R.id.webview);
+        myWebView = (WebView) mRootView.findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.getSettings().setBuiltInZoomControls(true);
         myWebView.setWebViewClient(new MyWebViewClient());
@@ -38,7 +39,6 @@ public class FragmentHome extends Fragment {
             public boolean onKey(View view, int i, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     WebView webView = (WebView) view;
-
                     switch (i) {
                         case KeyEvent.KEYCODE_BACK:
                             if (webView.canGoBack()) {
@@ -55,7 +55,8 @@ public class FragmentHome extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return (ViewGroup) inflater.inflate(R.layout.home, container, false);
+        mRootView = (ViewGroup) inflater.inflate(R.layout.home, container, false);
+        return mRootView;
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -67,9 +68,9 @@ public class FragmentHome extends Fragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             //hide loading image
-            getView().findViewById(R.id.homeProgress).setVisibility(View.GONE);
+            mRootView.findViewById(R.id.homeProgress).setVisibility(View.GONE);
             //Show webview
-            getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            myWebView.setVisibility(View.VISIBLE);
         }
     }
 }

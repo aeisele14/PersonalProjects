@@ -107,6 +107,4 @@ public class BreakfastFragment extends Fragment {
         }
         return breakfastItems;
     }
-
-
 }

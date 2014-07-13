@@ -16,6 +16,7 @@ import edu.hastings.hastingscollege.R;
 public class FragmentBroncoboard extends Fragment {
 
     WebView myWebView;
+    ViewGroup mRootView;
 
     public static Fragment newInstance(Context context) {
         return new FragmentBroncoboard();
@@ -31,7 +32,7 @@ public class FragmentBroncoboard extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        myWebView = (WebView) getView().findViewById(R.id.webview);
+        myWebView = (WebView) mRootView.findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new MyWebViewClient());
         myWebView.loadUrl(getString(R.string.broncoboard_url));
@@ -59,7 +60,8 @@ public class FragmentBroncoboard extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return (ViewGroup) inflater.inflate(R.layout.broncoboard, container, false);
+        mRootView = (ViewGroup) inflater.inflate(R.layout.broncoboard, container, false);
+        return mRootView;
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -71,9 +73,9 @@ public class FragmentBroncoboard extends Fragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             // hide loading image
-            getView().findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
+            mRootView.findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
             // Show webview
-            getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            mRootView.findViewById(R.id.webview).setVisibility(View.VISIBLE);
         }
     }
 }

@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -16,10 +15,15 @@ import edu.hastings.hastingscollege.R;
 public class FragmentTwitter extends Fragment{
 
     public static final String TAG = "FragmentTwitter";
+    private static final String baseURl = "https://twitter.com";
+
+    private static final String widgetInfo = "<a class=\"twitter-timeline\" data-dnt=\"true\" href=\"https://twitter.com/HC_Advantage\" data-widget-id=\"487669214384111616\" data-chrome=\"noheader nofooter noscrollbar noborders\" data-link-color=\"#990000\"></a>\n" +
+            "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\"://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>";
 
     public static Fragment newInstance(Context context) { return new FragmentTwitter(); }
 
     WebView myWebView;
+    ViewGroup mRootView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,14 +34,12 @@ public class FragmentTwitter extends Fragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myWebView = (WebView) getView().findViewById(R.id.webview);
+        myWebView = (WebView) mRootView.findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.getSettings().setBuiltInZoomControls(true);
         myWebView.setWebViewClient(new MyWebViewClient());
-        myWebView.loadUrl(getString(R.string.twitter_base_uri));
-        myWebView.loadUrl("javascript:(function() { " +
-                        "document.getElementById('brand_bar').style.display='none'; " +
-                        "})()");
+        //myWebView.loadDataWithBaseURL(baseURl, widgetInfo, "text/html", "UTF-8", null);
+        myWebView.loadUrl(getString(R.string.twitter_widget_host_url));
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent event) {
@@ -60,7 +62,8 @@ public class FragmentTwitter extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return (ViewGroup) inflater.inflate(R.layout.twitter, container, false);
+        mRootView = (ViewGroup) inflater.inflate(R.layout.twitter, container, false);
+        return mRootView;
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -72,9 +75,9 @@ public class FragmentTwitter extends Fragment{
         @Override
         public void onPageFinished(WebView view, String url) {
             //hide loading image
-            getView().findViewById(R.id.twitterProgress).setVisibility(View.GONE);
+            mRootView.findViewById(R.id.twitterProgress).setVisibility(View.GONE);
             //Show webview
-            getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            mRootView.findViewById(R.id.webview).setVisibility(View.VISIBLE);
         }
     }
 }

@@ -16,14 +16,14 @@ package edu.hastings.hastingscollege;
  * limitations under the License.
  */
 
-import android.content.BroadcastReceiver;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -41,6 +41,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAbout;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAthletics;
@@ -67,23 +77,19 @@ public class MainActivity extends FragmentActivity {
 
     private int mFragPosition = 0;
 
-    public static final String WIFI = "Wi-Fi";
-    public static final String ANY = "Any";
-
-    private static boolean wifiConnected = false;
-    private static boolean mobileConnected = true;
-    public static boolean refreshDisplay = true;
-
-    // The user's current network preference setting.
-    public static String sPref = null;
-
-    // The BroadcastReceiver that tracks network connectivity changes.
-    private NetworkReceiver receiver = new NetworkReceiver();
+    private boolean mConnection;
+    public static boolean mShouldNotify = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Checks whether the user set the preference to include summary text
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mShouldNotify = sharedPrefs.getBoolean("notificationsPref", false);
+
+        mConnection = new Connection().hasConnection(MainActivity.this);
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -128,11 +134,7 @@ public class MainActivity extends FragmentActivity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
-
-        // Register BroadcastReceiver to track connection changes.
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        receiver = new NetworkReceiver();
-        this.registerReceiver(receiver, filter);
+        new DownloadXmlTask().execute(getString(R.string.sodexo_menu_url));
     }
 
     private class SlideMenuClickListener implements
@@ -142,39 +144,6 @@ public class MainActivity extends FragmentActivity {
                                 long id) {
             // display view for selected nav drawer item
             selectItem(position);
-        }
-    }
-
-    // Refreshes the display if the network connection and the
-    // pref settings allow it.
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // Gets the user's network preference settings
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-        // Retrieves a string value for the preferences. The second parameter
-        // is the default value to use if a preference value is not found.
-        sPref = sharedPrefs.getString("listPref", "Wi-Fi");
-
-        updateConnectedFlags();
-
-        // Only loads the page if refreshDisplay is true. Otherwise, keeps previous
-        // display. For example, if the user has set "Wi-Fi only" in prefs and the
-        // device loses its Wi-Fi connection midway through the user using the app,
-        // you don't want to refresh the display--this would force the display of
-        // an error page instead of stackoverflow.com content.
-        if (refreshDisplay) {
-            loadApp();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (receiver != null) {
-            this.unregisterReceiver(receiver);
         }
     }
 
@@ -205,6 +174,8 @@ public class MainActivity extends FragmentActivity {
         // Handle action bar actions click
         switch (item.getItemId()) {
             case R.id.itemRefresh:
+                if (mFragPosition == 2)
+                    new DownloadXmlTask().execute(getString(R.string.sodexo_menu_url));
                 selectItem(mFragPosition);
                 return true;
             case R.id.settings:
@@ -220,50 +191,55 @@ public class MainActivity extends FragmentActivity {
         // update the main content frame by replacing fragments
         Fragment fragment = null;
         mFragPosition = position;
-        switch (position) {
-            case 0:
-                fragment = new FragmentHome();
-                break;
-            case 1:
-                fragment = new FragmentMap();
-                break;
-            case 2:
-                fragment = new FragmentSodexo();
-                break;
-            case 3:
-                fragment = new FragmentBroncoboard();
-                break;
-            case 4:
-                fragment = new FragmentTwitter();
-                break;
-            case 5:
-                fragment = new FragmentEventCalendar();
-                break;
-            case 6:
-                fragment = new FragmentAthletics();
-                break;
-            case 7:
-                fragment = new FragmentContacts();
-                 break;
-            case 8:
-                fragment = new FragmentAbout();
-            default:
-                break;
+        if (mConnection) {
+            switch (position) {
+                case 0:
+                    fragment = new FragmentHome();
+                    break;
+                case 1:
+                    fragment = new FragmentMap();
+                    break;
+                case 2:
+                    fragment = new FragmentSodexo();
+                    break;
+                case 3:
+                    fragment = new FragmentBroncoboard();
+                    break;
+                case 4:
+                    fragment = new FragmentTwitter();
+                    break;
+                case 5:
+                    fragment = new FragmentEventCalendar();
+                    break;
+                case 6:
+                    fragment = new FragmentAthletics();
+                    break;
+                case 7:
+                    fragment = new FragmentContacts();
+                    break;
+                case 8:
+                    fragment = new FragmentAbout();
+                default:
+                    break;
+            }
+
+            if (fragment != null) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment).commit();
+
+                // update selected item and title, then close the drawer
+                mDrawerList.setItemChecked(position, true);
+                mDrawerList.setSelection(position);
+                setTitle(navMenuTitles[position]);
+                mDrawerLayout.closeDrawer(mDrawerList);
+            } else {
+                // error in creating fragment
+                Log.e("MainActivity", "Error in creating fragment");
+            }
         }
-
-        if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment).commit();
-
-            // update selected item and title, then close the drawer
-            mDrawerList.setItemChecked(position, true);
-            mDrawerList.setSelection(position);
-            setTitle(navMenuTitles[position]);
-            mDrawerLayout.closeDrawer(mDrawerList);
-        } else {
-            // error in creating fragment
-            Log.e("MainActivity", "Error in creating fragment");
+        else {
+            buildDialog(this).show();
         }
     }
 
@@ -287,84 +263,89 @@ public class MainActivity extends FragmentActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    // Checks the network connection and sets the wifiConnected and mobileConnected
-    // variables accordingly.
-    private void updateConnectedFlags() {
-        ConnectivityManager connMgr =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    public AlertDialog.Builder buildDialog(Context c) {
 
-        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-        if (activeInfo != null && activeInfo.isConnected()) {
-            wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
-            mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
-        } else {
-            wifiConnected = false;
-            mobileConnected = false;
-        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setTitle("No Internet connection.");
+        builder.setMessage("You have no internet connection");
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        return builder;
     }
 
-    // Uses AsyncTask subclass to download the XML feed from stackoverflow.com.
-    // This avoids UI lock up. To prevent network operations from
-    // causing a delay that results in a poor user experience, always perform
-    // network operations on a separate thread from the UI.
-    private void loadApp() {
-        if (((sPref.equals(ANY)) && (wifiConnected || mobileConnected))
-                || ((sPref.equals(WIFI)) && (wifiConnected))) {
-
-        } else {
-            showError();
-        }
+    // Given a string representation of a URL, sets up a connection and gets
+    // an input stream.
+    private InputStream downloadUrl(String urlString) throws IOException {
+        URL url = new URL(urlString);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(10000 /* milliseconds */);
+        conn.setConnectTimeout(15000 /* milliseconds */);
+        conn.setRequestMethod("GET");
+        conn.setDoInput(true);
+        // Starts the query
+        conn.connect();
+        InputStream stream = conn.getInputStream();
+        return stream;
     }
+
 
     //Displays an error if the app is unable to load content.
-    private void showError() {
+    private void showSodexoError() {
         // The specified network connection is not available. Displays error message.
         Toast.makeText(this,
-                "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
+                "Unable to load feed, Check your internet connection",
                 Toast.LENGTH_LONG).show();
     }
 
-    /**
-     *
-     * This BroadcastReceiver intercepts the android.net.ConnectivityManager.CONNECTIVITY_ACTION,
-     * which indicates a connection change. It checks whether the type is TYPE_WIFI.
-     * If it is, it checks whether Wi-Fi is connected and sets the wifiConnected flag in the
-     * main activity accordingly.
-     *
-     */
-    public class NetworkReceiver extends BroadcastReceiver {
+    // Implementation of AsyncTask used to download XML feed
+    private class DownloadXmlTask extends AsyncTask<String, Void, List<HashMap<String, String>>> {
+
+        ProgressDialog progressDialog;
 
         @Override
-        public void onReceive(Context context, Intent intent) {
-            ConnectivityManager connMgr =
-                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(MainActivity.this, "Hastings College", "Loading App...");
+        }
 
-            // Checks the user prefs and the network connection. Based on the result, decides
-            // whether
-            // to refresh the display or keep the current display.
-            // If the userpref is Wi-Fi only, checks to see if the device has a Wi-Fi connection.
-            if (WIFI.equals(sPref) && networkInfo != null
-                    && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                // If device has its Wi-Fi connection, sets refreshDisplay
-                // to true. This causes the display to be refreshed when the user
-                // returns to the app.
-                refreshDisplay = true;
-                Toast.makeText(context, R.string.wifi_connected, Toast.LENGTH_SHORT).show();
-
-                // If the setting is ANY network and there is a network connection
-                // (which by process of elimination would be mobile), sets refreshDisplay to true.
-            } else if (ANY.equals(sPref) && networkInfo != null) {
-                refreshDisplay = true;
-
-                // Otherwise, the app can't download content--either because there is no network
-                // connection (mobile or Wi-Fi), or because the pref setting is WIFI, and there
-                // is no Wi-Fi connection.
-                // Sets refreshDisplay to false.
-            } else {
-                refreshDisplay = false;
-                Toast.makeText(context, R.string.lost_connection, Toast.LENGTH_SHORT).show();
+        @Override
+        protected List<HashMap<String, String>> doInBackground(String... urls) {
+            InputStream stream = null;
+            SodexoXmlParser sodexoXmlParser = new SodexoXmlParser();
+            List<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
+            try {
+                try {
+                    stream = downloadUrl(urls[0]);
+                    menuItems = sodexoXmlParser.parse(stream);
+                } finally {
+                    if (stream != null) {
+                        stream.close();
+                    }
+                }
+            } catch (IOException e) {
+                Log.d("IOException", e.toString());
+            } catch (XmlPullParserException e) {
+                Log.d("XmlPullParserException", e.toString());
             }
+
+            return menuItems;
+        }
+
+        @Override
+        protected void onPostExecute(List<HashMap<String, String>> menuItems) {
+            super.onPostExecute(menuItems);
+            if (menuItems != null) {
+                Data.globalMenuItems = menuItems;
+            }
+            else
+                showSodexoError();
+            progressDialog.dismiss();
         }
     }
 }

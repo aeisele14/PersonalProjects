@@ -15,6 +15,7 @@ import edu.hastings.hastingscollege.R;
 public class FragmentAthletics extends Fragment {
 
     WebView myWebView;
+    ViewGroup mRootView;
 
     public static Fragment newInstance(Context context) {
         return new FragmentAthletics();
@@ -29,7 +30,7 @@ public class FragmentAthletics extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myWebView = (WebView) getView().findViewById(R.id.webview);
+        myWebView = (WebView) mRootView.findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new MyWebViewClient());
         myWebView.loadUrl(getString(R.string.athletics_url));
@@ -58,8 +59,8 @@ public class FragmentAthletics extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.athletics, container, false);
-        return root;
+        mRootView = (ViewGroup) inflater.inflate(R.layout.athletics, container, false);
+        return mRootView;
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -71,9 +72,9 @@ public class FragmentAthletics extends Fragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             //hide loading image
-            getView().findViewById(R.id.athleticsProgress).setVisibility(View.GONE);
+            mRootView.findViewById(R.id.athleticsProgress).setVisibility(View.GONE);
             //Show webview
-            getView().findViewById(R.id.webview).setVisibility(View.VISIBLE);
+            mRootView.findViewById(R.id.webview).setVisibility(View.VISIBLE);
         }
     }
 }
