@@ -3,6 +3,7 @@ package edu.hastings.hastingscollege.tabfragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import edu.hastings.hastingscollege.R;
@@ -52,5 +53,13 @@ public class SingleMenuItemNutritionFactsActivity extends Activity {
         txtCarbo.setText(carbo);
         txtSugars.setText(sugars);
         txtProtein.setText(protein);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
     }
 }

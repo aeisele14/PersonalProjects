@@ -15,19 +15,22 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
     // Tab titles
     private static final String[] tabsTitles = { "Breakfast", "Lunch", "Dinner"  };
 
-    public TabsPagerAdapter(FragmentManager fm) {
+    private String dayOfWeek;
+
+    public TabsPagerAdapter(FragmentManager fm, String day) {
         super(fm);
+        this.dayOfWeek = day;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new BreakfastFragment();
+                return BreakfastFragment.newInstance(dayOfWeek);
             case 1:
-                return new LunchFragment();
+                return LunchFragment.newInstance(dayOfWeek);
             case 2:
-                return new DinnerFragment();
+                return DinnerFragment.newInstance(dayOfWeek);
         }
         return null;
     }

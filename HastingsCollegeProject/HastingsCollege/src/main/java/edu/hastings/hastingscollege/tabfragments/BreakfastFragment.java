@@ -20,7 +20,6 @@ import edu.hastings.hastingscollege.R;
 
 public class BreakfastFragment extends Fragment {
 
-    final String KEY_ITEM_DATE = "menudate";
     final String KEY_DAY = "dayname";
     final String KEY_MEAL = "meal";
     final String KEY_ITEM_NAME = "item_name";
@@ -33,6 +32,28 @@ public class BreakfastFragment extends Fragment {
     final String KEY_SUGARS = "sugars";
     final String KEY_PROTEIN = "protein";
 
+    private String day;
+    private String[] daysOfWeek;
+
+    public BreakfastFragment() {}
+
+    public static BreakfastFragment newInstance(String dayOfWeek) {
+        BreakfastFragment breakfastFragment = new BreakfastFragment();
+
+        Bundle arguments = new Bundle();
+        arguments.putString("dayname", dayOfWeek);
+        breakfastFragment.setArguments(arguments);
+        return breakfastFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle arguments = getArguments();
+        if (arguments != null)
+            day = arguments.getString(KEY_DAY);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,47 +61,29 @@ public class BreakfastFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_breakfast, container, false);
         ListView mListView = (ListView) rootView.findViewById(R.id.breakfastList);
         TextView txtHeaderText = (TextView) rootView.findViewById(R.id.list_item_menu_header_textview);
+        daysOfWeek = getResources().getStringArray(R.array.days_of_week);
 
-        final List<HashMap<String, String>> breakfastMenuItems = getBreakfastItems(Data.globalMenuItems);
+        final List<HashMap<String, String>> menuItems = getMenuItemsFromDay(day);
         String[] from = { KEY_ITEM_NAME, KEY_ITEM_DESC };
         int[] to = {R.id.item_name, R.id.item_desc};
-        HashMap<String, String> breakfastItem = breakfastMenuItems.get(0);
-        String headerDate = breakfastItem.get(KEY_ITEM_DATE);
-
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date date;
-//        try {
-//            date = dateFormat.parse(headerDate);
-//            headerDate = dateFormat.format(date);
-//        } catch (ParseException e) {
-//            Log.e("Parse Excepetion", e.toString());
-//        }
-
-        String headerText = breakfastItem.get(KEY_DAY) + " " + headerDate + "%n" +
-            getResources().getString(R.string.sodexo_breakfast_times);
-        headerText = String.format(headerText);
-
-        txtHeaderText.setText(headerText);
-
         SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(),
-                breakfastMenuItems,
+                menuItems,
                 R.layout.list_item_sodexo,
                 from,
                 to);
-
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemName = breakfastMenuItems.get(position).get(KEY_ITEM_NAME);
-                String calories = breakfastMenuItems.get(position).get(KEY_CALORIES);
-                String fat = breakfastMenuItems.get(position).get(KEY_FAT);
-                String satFat = breakfastMenuItems.get(position).get(KEY_SAT_FAT);
-                String sodium = breakfastMenuItems.get(position).get(KEY_SODIUM);
-                String carbo = breakfastMenuItems.get(position).get(KEY_CARBO);
-                String sugars = breakfastMenuItems.get(position).get(KEY_SUGARS);
-                String protein = breakfastMenuItems.get(position).get(KEY_PROTEIN);
+                String itemName = menuItems.get(position).get(KEY_ITEM_NAME);
+                String calories = menuItems.get(position).get(KEY_CALORIES);
+                String fat = menuItems.get(position).get(KEY_FAT);
+                String satFat = menuItems.get(position).get(KEY_SAT_FAT);
+                String sodium = menuItems.get(position).get(KEY_SODIUM);
+                String carbo = menuItems.get(position).get(KEY_CARBO);
+                String sugars = menuItems.get(position).get(KEY_SUGARS);
+                String protein = menuItems.get(position).get(KEY_PROTEIN);
 
                 Intent in = new Intent(getActivity(), SingleMenuItemNutritionFactsActivity.class);
                 in.putExtra(KEY_ITEM_NAME, itemName);
@@ -94,17 +97,45 @@ public class BreakfastFragment extends Fragment {
                 startActivity(in);
             }
         });
+
+        String headerText;
+        if (day.equals(daysOfWeek[5]) || day.equals(daysOfWeek[6]))
+            headerText = "Open from " + getResources().getString(R.string.sodexo_breakfast_times_weekend);
+        else
+            headerText = "Open from " + getResources().getString(R.string.sodexo_breakfast_times_weekday);
+
+        txtHeaderText.setText(headerText);
         return rootView;
     }
 
-    private List<HashMap<String, String>> getBreakfastItems(List<HashMap<String, String>> menuItems) {
+    private List<HashMap<String, String>> getBreakfastItems(List<HashMap<String, String>> menuItems, boolean isWeekday) {
         List<HashMap<String, String>> breakfastItems = new ArrayList<HashMap<String, String>>();
 
         for (HashMap<String, String> menuItem : menuItems) {
-            if (menuItem.get(KEY_MEAL).equals("Breakfast")) {
+            if (isWeekday && menuItem.get(KEY_MEAL).equals("Breakfast")) {
                 breakfastItems.add(menuItem);
             }
+            else if (!isWeekday && menuItem.get(KEY_MEAL).equals("Lunch"))
+                breakfastItems.add(menuItem);
         }
         return breakfastItems;
+    }
+
+    private List<HashMap<String, String>> getMenuItemsFromDay(String day) {
+        if (day.equals(daysOfWeek[0]))
+            return getBreakfastItems(Data.mondayMenu, true);
+        else if (day.equals(daysOfWeek[1]))
+            return getBreakfastItems(Data.tuesdayMenu, true);
+        else if (day.equals(daysOfWeek[2]))
+            return getBreakfastItems(Data.wednesdayMenu, true);
+        else if (day.equals(daysOfWeek[3]))
+            return getBreakfastItems(Data.thursdayMenu, true);
+        else if (day.equals(daysOfWeek[4]))
+            return getBreakfastItems(Data.fridayMenu, true);
+        else if (day.equals(daysOfWeek[5]))
+            return getBreakfastItems(Data.saturdayMenu, false);
+        else if (day.equals(daysOfWeek[6]))
+            return getBreakfastItems(Data.sundayMenu, false);
+        return new ArrayList<HashMap<String, String>>();
     }
 }

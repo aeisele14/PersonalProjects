@@ -45,6 +45,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".tabfragments.SodexoMenu"
+                  android:label="Sodexo Menu"
+                  android:screenOrientation="portrait">
+        </activity>
         <activity
             android:label="Nutrition Facts"
             android:name=".tabfragments.SingleMenuItemNutritionFactsActivity" >

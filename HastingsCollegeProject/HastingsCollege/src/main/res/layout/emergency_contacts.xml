@@ -10,18 +10,9 @@
         android:layout_height="wrap_content"
         layout="@layout/list_item_header" />
 
-    <ListView android:id="@+id/days_of_week_list"
+    <ListView android:id="@+id/contacts_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header_layout"  />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/error_text"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        android:text="@string/sodexo_error_text"/>
 
 </RelativeLayout>

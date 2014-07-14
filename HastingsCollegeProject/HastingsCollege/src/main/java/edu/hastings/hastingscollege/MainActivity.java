@@ -55,7 +55,7 @@ import java.util.List;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAbout;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAthletics;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentBroncoboard;
-import edu.hastings.hastingscollege.navdrawerfragments.FragmentContacts;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentEmergencyContacts;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentEventCalendar;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentHome;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentMap;
@@ -215,7 +215,7 @@ public class MainActivity extends FragmentActivity {
                     fragment = new FragmentAthletics();
                     break;
                 case 7:
-                    fragment = new FragmentContacts();
+                    fragment = new FragmentEmergencyContacts();
                     break;
                 case 8:
                     fragment = new FragmentAbout();
@@ -311,7 +311,7 @@ public class MainActivity extends FragmentActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(MainActivity.this, "Hastings College", "Loading App...");
+            progressDialog = ProgressDialog.show(MainActivity.this, "Hastings College", "Loading...");
         }
 
         @Override
@@ -342,10 +342,65 @@ public class MainActivity extends FragmentActivity {
             super.onPostExecute(menuItems);
             if (menuItems != null) {
                 Data.globalMenuItems = menuItems;
+                retrieveItems(menuItems);
             }
             else
                 showSodexoError();
             progressDialog.dismiss();
+        }
+
+        protected void retrieveItems(List<HashMap<String, String>> menuItems) {
+            final String KEY_ITEM_DATE = "menudate";
+            final String KEY_DAY = "dayname";
+
+            List<HashMap<String, String>> sundayMenu = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> mondayMenu = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> tuesdayMenu = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> wednesdayMenu = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> thursdayMenu = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> fridayMenu = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> saturdayMenu = new ArrayList<HashMap<String, String>>();
+            String[] dates = new String[7];
+
+            for (HashMap<String, String> menuItem : menuItems) {
+                if (menuItem.get(KEY_DAY).equals("Monday")) {
+                    mondayMenu.add(menuItem);
+                    dates[0] = menuItem.get(KEY_ITEM_DATE);
+                }
+                else if (menuItem.get(KEY_DAY).equals("Tuesday")) {
+                    tuesdayMenu.add(menuItem);
+                    dates[1] = menuItem.get(KEY_ITEM_DATE);
+                }
+                else if (menuItem.get(KEY_DAY).equals("Wednesday")) {
+                    wednesdayMenu.add(menuItem);
+                    dates[2] = menuItem.get(KEY_ITEM_DATE);
+                }
+                else if (menuItem.get(KEY_DAY).equals("Thursday")) {
+                    thursdayMenu.add(menuItem);
+                    dates[3] = menuItem.get(KEY_ITEM_DATE);
+                }
+                else if (menuItem.get(KEY_DAY).equals("Friday")) {
+                    fridayMenu.add(menuItem);
+                    dates[4] = menuItem.get(KEY_ITEM_DATE);
+                }
+                else if (menuItem.get(KEY_DAY).equals("Saturday")) {
+                    saturdayMenu.add(menuItem);
+                    dates[5] = menuItem.get(KEY_ITEM_DATE);
+                }
+                else if (menuItem.get(KEY_DAY).equals("Sunday")) {
+                    sundayMenu.add(menuItem);
+                    dates[6] = menuItem.get(KEY_ITEM_DATE);
+                }
+            }
+
+            Data.mondayMenu = mondayMenu;
+            Data.tuesdayMenu = tuesdayMenu;
+            Data.wednesdayMenu = wednesdayMenu;
+            Data.thursdayMenu = thursdayMenu;
+            Data.fridayMenu = fridayMenu;
+            Data.saturdayMenu = saturdayMenu;
+            Data.sundayMenu = sundayMenu;
+            Data.dates = dates;
         }
     }
 }

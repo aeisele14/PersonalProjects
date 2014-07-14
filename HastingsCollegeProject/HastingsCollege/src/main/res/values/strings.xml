@@ -13,7 +13,7 @@
         <item>Twitter</item>
         <item>Event Calendar</item>
         <item>Athletics</item>
-        <item>Contacts</item>
+        <item>Emergency Contacts</item>
         <item>About</item>
     </string-array>
 
@@ -44,9 +44,47 @@
     <string name="action_refresh">Refresh</string>
 
     <!-- Sodexo Dining Hall Times -->
-    <string name="sodexo_breakfast_times" formatted="false">Monday - Friday: 7:00 a.m. - 9:30 a.m.%nSaturday - Sunday: 11:30 a.m. - 1:00 p.m.</string>
+    <string name="sodexo_breakfast_times_weekday">7:00 a.m. - 9:30 a.m.</string>
+    <string name="sodexo_breakfast_times_weekend">11:30 a.m. - 1:00 p.m.</string>
+    <string name="sodexo_lunch_times_weekday">11:15 a.m. - 1:15 p.m.</string>
+    <string name="sodexo_lunch_times_weekend">11:30 a.m. - 1:00 p.m.</string>
+    <string name="sodexo_dinner_times_weekday">5:15 p.m. - 7:15 p.m.</string>
+    <string name="sodexo_dinner_times_sat">5:15 p.m. - 6:15 p.m.</string>
+    <string name="sodexo_dinner_times_sun">5:15 p.m. - 7:00 p.m.</string>
 
-    <string name="sodexo_lunch_times" formatted="false">Monday - Friday: 11:15 a.m. - 1:15 p.m.%nSaturday - Sunday: 11:30 a.m. - 1:00 p.m.</string>
+    <!-- Days of the Week for Sodexo -->
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 
-    <string name="sodexo_dinner_times" formatted="false">Monday - Friday: 5:15 p.m. - 7:15 p.m.%nSaturday: 5:15 p.m. - 6:15 p.m.%nSunday: 5:15 p.m. - 7:00 p.m.</string>
+    <string name="sodexo_error_text">Sodexo Menu Not Available</string>
+
+    <!-- Emergency Contacts -->
+    <string-array name="emergency_contact_names">
+        <item>Public Safety</item>
+        <item>Student Affairs</item>
+        <item>Bronco Bus</item>
+        <item>Hastings Police</item>
+        <item>I.T. Help Desk</item>
+        <item>Maintenance</item>
+        <item>Health Services</item>
+    </string-array>
+
+    <string-array name="emergency_contact_numbers">
+        <item>402–984–8064</item>
+        <item>402–461–7305</item>
+        <item>402–469–1564</item>
+        <item>911</item>
+        <item>402–461–1333</item>
+        <item>402–461–7337</item>
+        <item>402–461–7372</item>
+    </string-array>
+
+    <string name="emergency_contacts_header">Emergency Contacts for Hastings College</string>
 </resources>

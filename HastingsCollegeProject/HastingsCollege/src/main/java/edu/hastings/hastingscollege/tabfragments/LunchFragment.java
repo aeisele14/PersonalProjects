@@ -33,6 +33,28 @@ public class LunchFragment extends Fragment {
     final String KEY_SUGARS = "sugars";
     final String KEY_PROTEIN = "protein";
 
+    private String day;
+    private String[] daysOfWeek;
+
+    public LunchFragment() {}
+
+    public static LunchFragment newInstance(String dayOfWeek) {
+        LunchFragment lunchFragment = new LunchFragment();
+
+        Bundle arguments = new Bundle();
+        arguments.putString("dayname", dayOfWeek);
+        lunchFragment.setArguments(arguments);
+        return lunchFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle arguments = getArguments();
+        if (arguments != null)
+            day = arguments.getString(KEY_DAY);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,17 +62,11 @@ public class LunchFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_lunch, container, false);
         ListView mListView = (ListView) rootView.findViewById(R.id.lunchList);
         TextView txtHeaderText = (TextView) rootView.findViewById(R.id.list_item_menu_header_textview);
+        daysOfWeek = getResources().getStringArray(R.array.days_of_week);
 
-        final List<HashMap<String, String>> lunchMenuItems = getLunchItems(Data.globalMenuItems);
+        final List<HashMap<String, String>> lunchMenuItems = getMenuItemsFromDay(day);
         String[] from = { KEY_ITEM_NAME, KEY_ITEM_DESC };
         int[] to = {R.id.item_name, R.id.item_desc};
-        HashMap<String, String> lunchItem = lunchMenuItems.get(0);
-        String headerText = lunchItem.get(KEY_DAY) + " " + lunchItem.get(KEY_ITEM_DATE) + "%n" +
-                getResources().getString(R.string.sodexo_lunch_times);
-        headerText = String.format(headerText);
-
-        txtHeaderText.setText(headerText);
-
         SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(),
                 lunchMenuItems,
                 R.layout.list_item_sodexo,
@@ -58,7 +74,6 @@ public class LunchFragment extends Fragment {
                 to);
 
         mListView.setAdapter(adapter);
-
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,6 +98,14 @@ public class LunchFragment extends Fragment {
                 startActivity(in);
             }
         });
+
+        String headerText;
+        if (day.equals(daysOfWeek[5]) || day.equals(daysOfWeek[6]))
+            headerText = "Open from " + getResources().getString(R.string.sodexo_lunch_times_weekend);
+        else
+            headerText = "Open from " + getResources().getString(R.string.sodexo_lunch_times_weekday);
+
+        txtHeaderText.setText(headerText);
         return rootView;
     }
 
@@ -95,5 +118,23 @@ public class LunchFragment extends Fragment {
             }
         }
         return lunchItems;
+    }
+
+    private List<HashMap<String, String>> getMenuItemsFromDay(String day) {
+        if (day.equals(daysOfWeek[0]))
+            return getLunchItems(Data.mondayMenu);
+        else if (day.equals(daysOfWeek[1]))
+            return getLunchItems(Data.tuesdayMenu);
+        else if (day.equals(daysOfWeek[2]))
+            return getLunchItems(Data.wednesdayMenu);
+        else if (day.equals(daysOfWeek[3]))
+            return getLunchItems(Data.thursdayMenu);
+        else if (day.equals(daysOfWeek[4]))
+            return getLunchItems(Data.fridayMenu);
+        else if (day.equals(daysOfWeek[5]))
+            return getLunchItems(Data.saturdayMenu);
+        else if (day.equals(daysOfWeek[6]))
+            return getLunchItems(Data.sundayMenu);
+        return new ArrayList<HashMap<String, String>>();
     }
 }
