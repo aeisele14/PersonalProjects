@@ -59,6 +59,18 @@ public class FragmentHome extends Fragment {
         return mRootView;
     }
 
+    @Override
+    public void onDestroy() {
+        if (myWebView != null) {
+            mRootView.removeView(myWebView);
+            myWebView.removeAllViews();
+            myWebView.clearCache(true);
+            myWebView.clearHistory();
+            myWebView.destroy();
+        }
+        super.onDestroy();
+    }
+
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {

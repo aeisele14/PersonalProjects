@@ -20,18 +20,10 @@ import edu.hastings.hastingscollege.R;
 
 public class DinnerFragment extends Fragment {
 
-    final String KEY_ITEM_DATE = "menudate";
     final String KEY_DAY = "dayname";
     final String KEY_MEAL = "meal";
     final String KEY_ITEM_NAME = "item_name";
     final String KEY_ITEM_DESC = "item_desc";
-    final String KEY_CALORIES = "calories";
-    final String KEY_FAT = "fat";
-    final String KEY_SAT_FAT = "satfat";
-    final String KEY_SODIUM = "sodium";
-    final String KEY_CARBO = "carbo";
-    final String KEY_SUGARS = "sugars";
-    final String KEY_PROTEIN = "protein";
 
     private String day;
     private String[] daysOfWeek;
@@ -76,24 +68,15 @@ public class DinnerFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemName = dinnerMenuItems.get(position).get(KEY_ITEM_NAME);
-                String calories = dinnerMenuItems.get(position).get(KEY_CALORIES);
-                String fat = dinnerMenuItems.get(position).get(KEY_FAT);
-                String satFat = dinnerMenuItems.get(position).get(KEY_SAT_FAT);
-                String sodium = dinnerMenuItems.get(position).get(KEY_SODIUM);
-                String carbo = dinnerMenuItems.get(position).get(KEY_CARBO);
-                String sugars = dinnerMenuItems.get(position).get(KEY_SUGARS);
-                String protein = dinnerMenuItems.get(position).get(KEY_PROTEIN);
-
                 Intent in = new Intent(getActivity(), SingleMenuItemNutritionFactsActivity.class);
+                String[] menuItemKeys = getResources().getStringArray(R.array.sodexo_menu_item_keys);
+                for (int i = 5; i < menuItemKeys.length; i++){
+                    String itemAttribute = dinnerMenuItems.get(position).get(menuItemKeys[i]);
+                    in.putExtra(menuItemKeys[i], itemAttribute);
+                }
+                String itemName = dinnerMenuItems.get(position).get(KEY_ITEM_NAME);
                 in.putExtra(KEY_ITEM_NAME, itemName);
-                in.putExtra(KEY_CALORIES, calories);
-                in.putExtra(KEY_FAT, fat);
-                in.putExtra(KEY_SAT_FAT, satFat);
-                in.putExtra(KEY_SODIUM, sodium);
-                in.putExtra(KEY_CARBO, carbo);
-                in.putExtra(KEY_SUGARS, sugars);
-                in.putExtra(KEY_PROTEIN, protein);
+
                 startActivity(in);
             }
         });

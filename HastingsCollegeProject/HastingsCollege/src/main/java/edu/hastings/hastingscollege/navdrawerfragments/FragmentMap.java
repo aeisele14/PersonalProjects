@@ -17,6 +17,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import edu.hastings.hastingscollege.Connection;
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.map_db.LocationsDB;
@@ -40,44 +41,38 @@ public class FragmentMap extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mMap == null) {
-            // Zoom Point
-            final LatLng HASTINGS_CENTER = new LatLng(40.593413, -98.36964);
-            mMap = mMapFragment.getMap();
-            LocationsDB locationsDB = null;
-            try {
-                locationsDB = new LocationsDB(getActivity());
-            } catch (IOException e) {
-                e.printStackTrace();
+        // Zoom Point
+        final LatLng HASTINGS_CENTER = new LatLng(40.593413, -98.36964);
+        mMap = mMapFragment.getMap();
+        LocationsDB locationsDB = null;
+        try {
+            locationsDB = new LocationsDB(getActivity());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mDB = locationsDB.getReadableDatabase();
+        Cursor cursor = locationsDB.getData(mDB);
+
+        int columns = cursor.getCount();
+
+        if (mMap != null) {
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+            if (columns == 0)
+                Toast.makeText(getActivity(), "No Data",
+                        Toast.LENGTH_LONG).show();
+            else {
+                addMapMarkerFromDB(cursor);
             }
-            mDB = locationsDB.getReadableDatabase();
-            Cursor cursor = locationsDB.getData(mDB);
+            cursor.close();
+            mDB.close();
 
-            int columns = cursor.getCount();
-
-            if (mMap != null) {
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-                if (columns == 0)
-                    Toast.makeText(getActivity(), "No Data",
-                            Toast.LENGTH_LONG).show();
-                else {
-                    addMapMarkerFromDB(cursor);
-                }
-                cursor.close();
-                mDB.close();
-
-                // Move the camera instantly to Hastings with a zoom of 15
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS_CENTER, 15));
-                // Zoom in, animating the camera.
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-                mMap.setMyLocationEnabled(true);
-                mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            }
-        } else {
-            Toast.makeText(getActivity(),
-                    "Check Your Internet Connection, Wifi Or Mobile Data Must Be Enabled",
-                    Toast.LENGTH_LONG).show();
+            // Move the camera instantly to Hastings with a zoom of 15
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS_CENTER, 15));
+            // Zoom in, animating the camera.
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
         }
     }
 

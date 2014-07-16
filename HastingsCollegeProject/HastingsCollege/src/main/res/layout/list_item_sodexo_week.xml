@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/right_caret"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         android:paddingTop="6dip"
         android:paddingBottom="2dip"
@@ -23,6 +23,7 @@
         android:layout_below="@+id/day_of_week"
         android:layout_toLeftOf="@+id/right_caret"
         android:textColor="#ff2e2e2e"
+        android:textSize="16sp"
         android:paddingBottom="2dip"
         android:paddingLeft="6dp">
     </TextView>

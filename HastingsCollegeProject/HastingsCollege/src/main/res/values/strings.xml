@@ -11,9 +11,9 @@
         <item>Sodexo</item>
         <item>BroncoBoard</item>
         <item>Twitter</item>
-        <item>Event Calendar</item>
+        <item>Campus Events</item>
         <item>Athletics</item>
-        <item>Emergency Contacts</item>
+        <item>Campus Contacts</item>
         <item>About</item>
     </string-array>
 
@@ -53,6 +53,66 @@
     <string name="sodexo_dinner_times_sun">5:15 p.m. - 7:00 p.m.</string>
 
     <!-- Days of the Week for Sodexo -->
+
+    <string-array name="sodexo_menu_item_keys">
+        <item>menudate</item>
+        <item>dayname</item>
+        <item>meal</item>
+        <item>item_name</item>
+        <item>item_desc</item>
+        <item>serv_size</item>
+        <item>allergens</item>
+        <item>calories</item>
+        <item>fat</item>
+        <item>fat_pct_dv</item>
+        <item>calfat</item>
+        <item>satfat</item>
+        <item>satfat_pct_dv</item>
+        <item>transfat</item>
+        <item>chol</item>
+        <item>chol_pct_dv</item>
+        <item>sodium</item>
+        <item>sodium_pct_dv</item>
+        <item>carbo</item>
+        <item>carbo_pct_dv</item>
+        <item>dfib</item>
+        <item>dfib_pct_dv</item>
+        <item>sugars</item>
+        <item>protein</item>
+        <item>vita_pct_dv</item>
+        <item>vitc_pct_dv</item>
+        <item>calcium_pct_dv</item>
+        <item>iron_pct_dv</item>
+        <item>ingredient</item>
+    </string-array>
+
+    <string-array name="sodexo_menu_item_labels">
+        <item>Serving Size: </item>
+        <item>Allergens: </item>
+        <item>Calories: </item>
+        <item>Fat: </item>
+        <item>Fat % Daily Value: </item>
+        <item>Caloric Content of Fat: </item>
+        <item>Saturated Fat: </item>
+        <item>Saturated Fat % Daily Value: </item>
+        <item>Trans Fat: </item>
+        <item>Cholesterol: </item>
+        <item>Cholesterol % Daily Value: </item>
+        <item>Sodium: </item>
+        <item>Sodium % Daily Value: </item>
+        <item>Carbohydrates: </item>
+        <item>Carbohydrates % Daily Value: </item>
+        <item>Fiber: </item>
+        <item>Fiber % Daily Value: </item>
+        <item>Sugars: </item>
+        <item>Protein: </item>
+        <item>Vitamin A % Daily Value: </item>
+        <item>Vitamin C % Daily Value: </item>
+        <item>Calcium % Daily Value: </item>
+        <item>Iron % Daily Value: </item>
+        <item>Ingredients: </item>
+    </string-array>
+
     <string-array name="days_of_week">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -70,7 +130,7 @@
         <item>Public Safety</item>
         <item>Student Affairs</item>
         <item>Bronco Bus</item>
-        <item>Hastings Police</item>
+        <item>Hastings Police (Non-Emergency)</item>
         <item>I.T. Help Desk</item>
         <item>Maintenance</item>
         <item>Health Services</item>
@@ -80,11 +140,9 @@
         <item>402–984–8064</item>
         <item>402–461–7305</item>
         <item>402–469–1564</item>
-        <item>911</item>
+        <item>402–461–2380</item>
         <item>402–461–1333</item>
         <item>402–461–7337</item>
         <item>402–461–7372</item>
     </string-array>
-
-    <string name="emergency_contacts_header">Emergency Contacts for Hastings College</string>
 </resources>

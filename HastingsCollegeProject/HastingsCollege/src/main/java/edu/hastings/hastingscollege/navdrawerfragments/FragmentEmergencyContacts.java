@@ -1,10 +1,13 @@
 package edu.hastings.hastingscollege.navdrawerfragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,16 +26,20 @@ public class FragmentEmergencyContacts extends Fragment {
 
         ArrayList<ContactsDataModel> contactsDataModelArrayList = new ArrayList<ContactsDataModel>();
         String[] contactNames = getResources().getStringArray(R.array.emergency_contact_names);
-        String[] contactPhoneNums = getResources().getStringArray(R.array.emergency_contact_numbers);
+        final String[] contactPhoneNums = getResources().getStringArray(R.array.emergency_contact_numbers);
         for (int i = 0; i < contactNames.length; i++) {
             contactsDataModelArrayList.add(new ContactsDataModel(contactNames[i], contactPhoneNums[i]));
         }
         CustomEContactsAdapter customEContactsAdapter = new CustomEContactsAdapter(contactsDataModelArrayList);
         contactsList.setAdapter(customEContactsAdapter);
-
-        TextView txtHeaderText = (TextView) view.findViewById(R.id.list_item_menu_header_textview);
-        String headerText = getResources().getString(R.string.emergency_contacts_header);
-        txtHeaderText.setText(headerText);
+        contactsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:" + contactPhoneNums[position]));
+                parent.getContext().startActivity(callIntent);
+            }
+        });
         return view;
     }
 }

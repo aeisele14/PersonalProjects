@@ -29,7 +29,7 @@ public class FragmentSodexo extends Fragment {
         View view = inflater.inflate(R.layout.sodexo, container, false);
         ListView mDaysOfWeekList = (ListView) view.findViewById(R.id.days_of_week_list);
 
-        if (Data.globalMenuItems.size() > 0) {
+        if (Data.mondayMenu.size() > 0) {
             String[] mDaysOfWeek = getResources().getStringArray(R.array.days_of_week);
 
             final String KEY_ITEM_DATE = "menudate";

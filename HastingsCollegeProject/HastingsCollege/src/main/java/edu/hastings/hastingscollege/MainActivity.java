@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -137,6 +138,61 @@ public class MainActivity extends FragmentActivity {
         new DownloadXmlTask().execute(getString(R.string.sodexo_menu_url));
     }
 
+    @Override
+    public void finish() {
+        Data.mondayMenu = null;
+        Data.tuesdayMenu = null;
+        Data.wednesdayMenu = null;
+        Data.thursdayMenu = null;
+        Data.fridayMenu = null;
+        Data.saturdayMenu = null;
+        Data.sundayMenu = null;
+        Data.dates = null;
+        super.finish();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+
+    //Fires after the OnStop() state
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            trimCache(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void trimCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            if (dir != null && dir.isDirectory()) {
+                deleteDir(dir);
+            }
+        } catch (Exception e) {
+            Log.v("Trim Cache exception", e.toString());
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+
+        // The directory is now empty so delete it
+        return dir.delete();
+    }
+
     private class SlideMenuClickListener implements
             ListView.OnItemClickListener {
         @Override
@@ -159,8 +215,9 @@ public class MainActivity extends FragmentActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        boolean fragmentRefreshable = ((mFragPosition != 5) && (mFragPosition != 7) && (mFragPosition != 8));
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-        menu.findItem(R.id.itemRefresh).setVisible(!drawerOpen);
+        menu.findItem(R.id.itemRefresh).setVisible(!drawerOpen && fragmentRefreshable);
         menu.findItem(R.id.settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
@@ -267,7 +324,7 @@ public class MainActivity extends FragmentActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
         builder.setTitle("No Internet connection.");
-        builder.setMessage("You have no internet connection");
+        builder.setMessage("Check your Internet Connection");
 
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
@@ -317,7 +374,7 @@ public class MainActivity extends FragmentActivity {
         @Override
         protected List<HashMap<String, String>> doInBackground(String... urls) {
             InputStream stream = null;
-            SodexoXmlParser sodexoXmlParser = new SodexoXmlParser();
+            SodexoXmlParser sodexoXmlParser = new SodexoXmlParser(MainActivity.this);
             List<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
             try {
                 try {
@@ -341,7 +398,6 @@ public class MainActivity extends FragmentActivity {
         protected void onPostExecute(List<HashMap<String, String>> menuItems) {
             super.onPostExecute(menuItems);
             if (menuItems != null) {
-                Data.globalMenuItems = menuItems;
                 retrieveItems(menuItems);
             }
             else

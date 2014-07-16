@@ -57,6 +57,17 @@ public class FragmentBroncoboard extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        if (myWebView != null) {
+            mRootView.removeView(myWebView);
+            myWebView.removeAllViews();
+            myWebView.clearCache(true);
+            myWebView.clearHistory();
+            myWebView.destroy();
+        }
+        super.onDestroy();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
