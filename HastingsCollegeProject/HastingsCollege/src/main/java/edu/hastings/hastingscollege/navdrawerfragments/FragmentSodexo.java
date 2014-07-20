@@ -20,6 +20,7 @@ import java.util.List;
 
 import edu.hastings.hastingscollege.Data;
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.adapter.CustomSodexoWeekMenuAdapter;
 import edu.hastings.hastingscollege.tabfragments.SodexoMenu;
 
 public class FragmentSodexo extends Fragment {
@@ -43,24 +44,10 @@ public class FragmentSodexo extends Fragment {
                 daysList.add(dayOfWeek);
             }
 
-            String[] from = {KEY_DAY, KEY_ITEM_DATE};
-            int[] to = {R.id.day_of_week, R.id.date};
-
-            SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(),
-                    daysList,
-                    R.layout.list_item_sodexo_week,
-                    from,
-                    to);
+            mDaysOfWeekList.addHeaderView(new View(getActivity()));
+            mDaysOfWeekList.addFooterView(new View(getActivity()));
+            CustomSodexoWeekMenuAdapter adapter = new CustomSodexoWeekMenuAdapter(daysList);
             mDaysOfWeekList.setAdapter(adapter);
-            mDaysOfWeekList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String dayName = daysList.get(position).get(KEY_DAY);
-                    Intent i = new Intent(getActivity(), SodexoMenu.class);
-                    i.putExtra(KEY_DAY, dayName);
-                    startActivity(i);
-                }
-            });
 
             TextView txtHeaderText = (TextView) view.findViewById(R.id.list_item_menu_header_textview);
             String headerDate = dates[0];

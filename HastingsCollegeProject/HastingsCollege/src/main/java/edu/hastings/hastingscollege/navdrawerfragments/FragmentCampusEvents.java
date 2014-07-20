@@ -46,6 +46,7 @@ public class FragmentCampusEvents extends Fragment {
 
     ArrayList<HashMap<String, String>> eventsList;
     private ListView eventsListView;
+    View view;
 
     public static Fragment newInstance(Context context) {return new FragmentCampusEvents(); }
 
@@ -58,7 +59,7 @@ public class FragmentCampusEvents extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = (ViewGroup) inflater.inflate(R.layout.campus_events, null);
+        view = inflater.inflate(R.layout.campus_events, null);
 
         eventsListView = (ListView) view.findViewById(R.id.event_list);
         eventsListView.addHeaderView(new View(getActivity()));
@@ -135,9 +136,11 @@ public class FragmentCampusEvents extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    return null;
                 }
             } else {
                 Log.e("ServiceHandler", "Couldn't get any data from the url");
+                return null;
             }
 
             return eventsArrayList;
@@ -152,8 +155,15 @@ public class FragmentCampusEvents extends Fragment {
             /**
              * Updating parsed JSON data into ListView
              * */
-            CustomEventsAdapter adapter = new CustomEventsAdapter(eventsArrayList);
-            eventsListView.setAdapter(adapter);
+            if (eventsArrayList != null) {
+                CustomEventsAdapter adapter = new CustomEventsAdapter(eventsArrayList);
+                eventsListView.setAdapter(adapter);
+            }
+            else {
+                eventsListView.setVisibility(View.GONE);
+                view.findViewById(R.id.error_text).setVisibility(View.VISIBLE);
+            }
+
         }
 
         protected String loadJsonFromAssets(){

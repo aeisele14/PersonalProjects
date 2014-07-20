@@ -53,6 +53,8 @@
     <string name="sodexo_dinner_times_sat">5:15 p.m. - 6:15 p.m.</string>
     <string name="sodexo_dinner_times_sun">5:15 p.m. - 7:00 p.m.</string>
 
+    <string name="sodexo_menu_btn">Menu</string>
+
     <!-- Days of the Week for Sodexo -->
 
     <string-array name="sodexo_menu_item_keys">
@@ -147,5 +149,6 @@
         <item>402–461–7372</item>
     </string-array>
 
-    <string name="event_button">Event Information</string>
+    <string name="event_button">Event Schedule</string>
+    <string name="events_error">Campus Events Unavailable</string>
 </resources>
