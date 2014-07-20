@@ -24,16 +24,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: edu.hastings.hastingscollege" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8384a55c-bdb4-44fe-a017-28f17c1cad6c" name="Default" comment="Added Campus Events with Json Parsing">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/adapter/CustomSodexoWeekMenuAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentCampusEvents.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentCampusEvents.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentSodexo.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentSodexo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/campus_events.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/campus_events.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/list_item_sodexo_week.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/list_item_sodexo_week.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/sodexo.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/layout/sodexo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="8384a55c-bdb4-44fe-a017-28f17c1cad6c" name="Default" comment="" />
     <ignored path="HastingsCollege.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -219,7 +210,7 @@
       <file leaf-file-name="campus_events.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HastingsCollege/src/main/res/layout/campus_events.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.272973" vertical-offset="22" max-vertical-offset="595">
+            <state vertical-scroll-proportion="0.82198954" vertical-offset="22" max-vertical-offset="595">
               <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
               <folding />
             </state>
@@ -2577,15 +2568,19 @@
       <created>1405874825105</created>
       <updated>1405874825105</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Refactored Sodexo Menu to use Cards UI">
+      <created>1405878879187</created>
+      <updated>1405878879187</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="56" y="-8" width="1318" height="784" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32324842" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32324842" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2718601" sideWeight="0.5964912" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2675,7 +2670,8 @@
     <MESSAGE value="Restructured Sodexo to include days of week. Completed Emergency Contacts Fragment" />
     <MESSAGE value="Added more nutrition facts. Re-designed campus contacts." />
     <MESSAGE value="Added Campus Events with Json Parsing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Campus Events with Json Parsing" />
+    <MESSAGE value="Refactored Sodexo Menu to use Cards UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored Sodexo Menu to use Cards UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3131,7 +3127,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HastingsCollege/src/main/res/layout/campus_events.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.272973" vertical-offset="22" max-vertical-offset="595">
+        <state vertical-scroll-proportion="0.82198954" vertical-offset="22" max-vertical-offset="595">
           <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding />
         </state>
