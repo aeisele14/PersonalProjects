@@ -37,6 +37,7 @@
     <string name="twitter_base_url">https://twitter.com</string>
     <string name="twitter_widget_host_url">https://1c6c5262646a93928bcc5104f39d2d0018574911.googledrive.com/host/0B33MIzmxUSJTRHJHMWdZc1lxYjA/index.html</string>
     <string name="sodexo_menu_url">http://forms.hastings.edu/Apps/menu.xml</string>
+    <string name="campus_events_url">https://dl.dropboxusercontent.com/s/k91grolb3auv3up/event-data.json</string>
 
     <!-- Nav Drawer -->
     <string name="drawer_open">Open navigation drawer</string>
@@ -145,4 +146,6 @@
         <item>402–461–7337</item>
         <item>402–461–7372</item>
     </string-array>
+
+    <string name="event_button">Event Information</string>
 </resources>

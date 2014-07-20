@@ -56,8 +56,8 @@ import java.util.List;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAbout;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAthletics;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentBroncoboard;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentCampusEvents;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentEmergencyContacts;
-import edu.hastings.hastingscollege.navdrawerfragments.FragmentEventCalendar;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentHome;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentMap;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentSodexo;
@@ -266,7 +266,7 @@ public class MainActivity extends FragmentActivity {
                     fragment = new FragmentTwitter();
                     break;
                 case 5:
-                    fragment = new FragmentEventCalendar();
+                    fragment = new FragmentCampusEvents();
                     break;
                 case 6:
                     fragment = new FragmentAthletics();
@@ -331,6 +331,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                finish();
             }
         });
         return builder;
@@ -368,7 +369,7 @@ public class MainActivity extends FragmentActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(MainActivity.this, "Hastings College", "Loading...");
+                progressDialog = ProgressDialog.show(MainActivity.this, "Hastings College", "Loading...");
         }
 
         @Override
@@ -402,7 +403,8 @@ public class MainActivity extends FragmentActivity {
             }
             else
                 showSodexoError();
-            progressDialog.dismiss();
+            if (progressDialog.isShowing())
+                progressDialog.dismiss();
         }
 
         protected void retrieveItems(List<HashMap<String, String>> menuItems) {

@@ -3,7 +3,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#e5e5e5">
 
     <include android:id="@+id/header_layout"
         android:layout_width="fill_parent"
@@ -19,6 +20,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/error_text"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="gone"
