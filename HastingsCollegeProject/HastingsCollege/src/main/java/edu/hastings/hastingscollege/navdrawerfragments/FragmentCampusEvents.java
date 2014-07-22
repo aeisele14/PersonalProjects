@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.hastings.hastingscollege.Event;
+import edu.hastings.hastingscollege.EventModel;
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.ServiceHandler;
 import edu.hastings.hastingscollege.adapter.CustomEventsAdapter;
@@ -68,7 +68,7 @@ public class FragmentCampusEvents extends Fragment {
         return view;
     }
 
-    private class GetEvents extends AsyncTask<String, Void, ArrayList<Event>> {
+    private class GetEvents extends AsyncTask<String, Void, ArrayList<EventModel>> {
 
         @Override
         protected void onPreExecute() {
@@ -82,16 +82,16 @@ public class FragmentCampusEvents extends Fragment {
         }
 
         @Override
-        protected ArrayList<Event> doInBackground(String... urls) {
+        protected ArrayList<EventModel> doInBackground(String... urls) {
             // Creating service handler class instance
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
-            //String jsonStr = sh.makeServiceCall(urls[0], ServiceHandler.GET);
-            String jsonStr = loadJsonFromAssets();
+            String jsonStr = sh.makeServiceCall(urls[0], ServiceHandler.GET);
+            //String jsonStr = loadJsonFromAssets();
 
             Log.d("Response: ", "> " + jsonStr);
-            ArrayList<Event> eventsArrayList = new ArrayList<Event>();
+            ArrayList<EventModel> eventsArrayList = new ArrayList<EventModel>();
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -131,8 +131,8 @@ public class FragmentCampusEvents extends Fragment {
                             }
                             eventInformationList.add(eventDaysList);
                         }
-                        Event event = new Event(eventName, eventWeek, eventDayNames, eventInformationList);
-                        eventsArrayList.add(event);
+                        EventModel eventModel = new EventModel(eventName, eventWeek, eventDayNames, eventInformationList);
+                        eventsArrayList.add(eventModel);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -147,7 +147,7 @@ public class FragmentCampusEvents extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Event> eventsArrayList) {
+        protected void onPostExecute(ArrayList<EventModel> eventsArrayList) {
             super.onPostExecute(eventsArrayList);
             // Dismiss the progress dialog
             if (pDialog.isShowing())

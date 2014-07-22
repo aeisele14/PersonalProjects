@@ -215,7 +215,7 @@ public class MainActivity extends FragmentActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        boolean fragmentRefreshable = ((mFragPosition != 5) && (mFragPosition != 7) && (mFragPosition != 8));
+        boolean fragmentRefreshable = ((mFragPosition != 7) && (mFragPosition != 8));
         //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         menu.findItem(R.id.itemRefresh).setVisible(!drawerOpen && fragmentRefreshable);
         menu.findItem(R.id.settings).setVisible(!drawerOpen);

@@ -14,19 +14,19 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.hastings.hastingscollege.Event;
+import edu.hastings.hastingscollege.EventModel;
 import edu.hastings.hastingscollege.R;
 
 public class CustomEventsAdapter extends BaseAdapter {
     private static final String TAG = CustomEventsAdapter.class.getSimpleName();
 
-    ArrayList<Event> listArray;
+    ArrayList<EventModel> listArray;
 
     private static final String TAG_TITLE = "event_title";
     private static final String TAG_LOCATION = "event_location";
     private static final String TAG_TIME = "event_time";
 
-    public CustomEventsAdapter(ArrayList<Event> eventsArrayList) {
+    public CustomEventsAdapter(ArrayList<EventModel> eventsArrayList) {
         this.listArray = eventsArrayList;
     }
 
@@ -52,13 +52,13 @@ public class CustomEventsAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item_event, parent, false);
         }
 
-        final Event event = listArray.get(position);
+        final EventModel eventModel = listArray.get(position);
 
         TextView eventName = (TextView) convertView.findViewById(R.id.event_name);
-        eventName.setText(event.eventName);
+        eventName.setText(eventModel.eventName);
 
         TextView eventWeek = (TextView) convertView.findViewById(R.id.event_week);
-        eventWeek.setText(event.eventWeek);
+        eventWeek.setText(eventModel.eventWeek);
 
         final Button eventInfoBtn = (Button) convertView.findViewById(R.id.more_info_btn);
         eventInfoBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,16 +67,16 @@ public class CustomEventsAdapter extends BaseAdapter {
             public void onClick(View v) {
                 View eventDialogView = layoutInflater.inflate(R.layout.event_dialog, null);
                 LinearLayout eventDialogLayout = (LinearLayout) eventDialogView.findViewById(R.id.event_info_dialog);
-                for(int i = 0; i < event.eventsOfDay.size(); i++) {
+                for(int i = 0; i < eventModel.eventsOfDay.size(); i++) {
                     LinearLayout eventDaySection = (LinearLayout) layoutInflater.inflate(R.layout.event_information_template, eventDialogLayout, false);
                     TextView eventDayHeaderText = (TextView) eventDaySection.findViewById(R.id.day_label);
-                    eventDayHeaderText.setText(event.eventDays[i]);
+                    eventDayHeaderText.setText(eventModel.eventDays[i]);
                     ListView eventInfoList = (ListView) eventDaySection.findViewById(R.id.event_info_list);
                     eventInfoList.addHeaderView(new View(parent.getContext()));
                     eventInfoList.addFooterView(new View(parent.getContext()));
                     String[] from = {TAG_TITLE, TAG_LOCATION, TAG_TIME};
                     int[] to = {R.id.event_title, R.id.event_location, R.id.event_time};
-                    SimpleAdapter adapter = new SimpleAdapter(parent.getContext(), event.eventsOfDay.get(i), R.layout.list_item_event_info, from, to);
+                    SimpleAdapter adapter = new SimpleAdapter(parent.getContext(), eventModel.eventsOfDay.get(i), R.layout.list_item_event_info, from, to);
                     eventInfoList.setAdapter(adapter);
                     HelperExpandListView.getListViewSize(eventInfoList);
                     eventInfoList.setClickable(false);
@@ -85,7 +85,7 @@ public class CustomEventsAdapter extends BaseAdapter {
 
                 final Dialog dialog = new Dialog(parent.getContext());
                 dialog.setContentView(eventDialogView);
-                dialog.setTitle(event.eventName);
+                dialog.setTitle(eventModel.eventName);
                 dialog.setCancelable(true);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
