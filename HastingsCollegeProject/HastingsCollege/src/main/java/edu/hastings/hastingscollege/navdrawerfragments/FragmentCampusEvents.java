@@ -89,8 +89,6 @@ public class FragmentCampusEvents extends Fragment {
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(urls[0], ServiceHandler.GET);
             //String jsonStr = loadJsonFromAssets();
-
-            Log.d("Response: ", "> " + jsonStr);
             ArrayList<EventModel> eventsArrayList = new ArrayList<EventModel>();
             if (jsonStr != null) {
                 try {

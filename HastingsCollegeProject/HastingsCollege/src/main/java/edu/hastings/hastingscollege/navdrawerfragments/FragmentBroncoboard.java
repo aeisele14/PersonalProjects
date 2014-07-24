@@ -7,10 +7,12 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 import edu.hastings.hastingscollege.Connection;
+import edu.hastings.hastingscollege.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
 
 public class FragmentBroncoboard extends Fragment {
@@ -87,6 +89,45 @@ public class FragmentBroncoboard extends Fragment {
             mRootView.findViewById(R.id.broncoBoardProgress).setVisibility(View.GONE);
             // Show webview
             mRootView.findViewById(R.id.webview).setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void onReceivedHttpAuthRequest(WebView view,
+                                              final HttpAuthHandler handler, final String host,
+                                              final String realm) {
+            String username = null;
+            String password = null;
+
+            boolean reuseHttpAuthUsernamePassword
+                    = handler.useHttpAuthUsernamePassword();
+
+            if (reuseHttpAuthUsernamePassword && view != null) {
+                String[] credentials = view.getHttpAuthUsernamePassword(host, realm);
+                if (credentials != null && credentials.length == 2) {
+                    username = credentials[0];
+                    password = credentials[1];
+                }
+            }
+
+            if (username != null && password != null) {
+                handler.proceed(username, password);
+            } else {
+                HttpAuthenticationDialog dialog = new HttpAuthenticationDialog(getActivity(), host, realm);
+
+                dialog.setOkListener(new HttpAuthenticationDialog.OkListener() {
+                    public void onOk(String host, String realm, String username, String password) {
+                        handler.proceed(username, password);
+                    }
+                });
+
+                dialog.setCancelListener(new HttpAuthenticationDialog.CancelListener() {
+                    public void onCancel() {
+                        handler.cancel();
+                    }
+                });
+
+                dialog.show();
+            }
         }
     }
 }

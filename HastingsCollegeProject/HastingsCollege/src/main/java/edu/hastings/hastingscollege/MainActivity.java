@@ -57,10 +57,10 @@ import edu.hastings.hastingscollege.navdrawerfragments.FragmentAbout;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAthletics;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentBroncoboard;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentCampusEvents;
+import edu.hastings.hastingscollege.navdrawerfragments.FragmentDiningHall;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentEmergencyContacts;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentHome;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentMap;
-import edu.hastings.hastingscollege.navdrawerfragments.FragmentSodexo;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentTwitter;
 
 public class MainActivity extends FragmentActivity {
@@ -87,8 +87,8 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         // Checks whether the user set the preference to include summary text
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mShouldNotify = sharedPrefs.getBoolean("notificationsPref", false);
+        //SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //mShouldNotify = sharedPrefs.getBoolean("notificationsPref", false);
 
         mConnection = new Connection().hasConnection(MainActivity.this);
 
@@ -149,6 +149,7 @@ public class MainActivity extends FragmentActivity {
         Data.sundayMenu = null;
         Data.dates = null;
         super.finish();
+        //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     @Override
@@ -257,7 +258,7 @@ public class MainActivity extends FragmentActivity {
                     fragment = new FragmentMap();
                     break;
                 case 2:
-                    fragment = new FragmentSodexo();
+                    fragment = new FragmentDiningHall();
                     break;
                 case 3:
                     fragment = new FragmentBroncoboard();

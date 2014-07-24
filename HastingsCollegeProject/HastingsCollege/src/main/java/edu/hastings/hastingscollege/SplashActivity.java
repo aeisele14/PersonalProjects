@@ -10,7 +10,7 @@ import android.view.Window;
 
 public class SplashActivity extends Activity {
 
-    private final long SPLASH_TIME_OUT = 2000;
+    private final long SPLASH_TIME_OUT = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
