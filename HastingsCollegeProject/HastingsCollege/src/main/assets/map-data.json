@@ -6,7 +6,7 @@
     "latitude":40.590561,
     "longitude":-98.373438,
     "title":"Kiewit Building",
-    "snippet":"Art, Recreation, Public Safety"
+    "snippet":"Practice Facilities, Recreation and Public Safety"
   },
   {
     "_id":2,
@@ -196,6 +196,13 @@
   "longitude":-98.3748975,
   "title":"Duncan Field",
   "snippet":"Home of Bronco baseball"
+  },
+  {
+  "_id":29,
+  "latitude":40.590508,
+  "longitude":-98.373757,
+  "title":"Arts Center",
+  "snippet":"Arts courses and gallery"
   }
 ]
 }

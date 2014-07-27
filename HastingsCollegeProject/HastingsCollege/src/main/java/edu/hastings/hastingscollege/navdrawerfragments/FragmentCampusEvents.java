@@ -165,26 +165,5 @@ public class FragmentCampusEvents extends Fragment {
             }
 
         }
-
-        protected String loadJsonFromAssets(){
-            String json = null;
-            try {
-                InputStream is = getActivity().getAssets().open("campus_events.json");
-                int size = is.available();
-                byte[] buffer = new byte[size];
-
-                is.read(buffer);
-
-                is.close();
-
-                json = new String(buffer, "UTF-8");
-
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                return null;
-            }
-            return json;
-        }
     }
 }

@@ -1,10 +1,13 @@
 package edu.hastings.hastingscollege.navdrawerfragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +21,34 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.adapter.CustomEventsAdapter;
+import edu.hastings.hastingscollege.connection.ServiceHandler;
 import edu.hastings.hastingscollege.map_db.LocationsDB;
+import edu.hastings.hastingscollege.model.EventModel;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class FragmentMap extends Fragment {
 
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
-    private SQLiteDatabase mDB;
+    private ProgressDialog pDialog;
 
     public static final String TAG = "FragmentMap";
+    private static final String TAG_LOCATIONS = "Locations";
+    private static final String TAG_LAT = "latitude";
+    private static final String TAG_LONG = "longitude";
+    private static final String TAG_TITLE = "title";
+    private static final String TAG_SNIPPET = "snippet";
 
     public FragmentMap() {
         // Empty constructor required for fragment subclasses
@@ -45,50 +64,17 @@ public class FragmentMap extends Fragment {
         // Zoom Point
         final LatLng HASTINGS_CENTER = new LatLng(40.593413, -98.36964);
         mMap = mMapFragment.getMap();
-        LocationsDB locationsDB = null;
-        try {
-            locationsDB = new LocationsDB(getActivity());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        mDB = locationsDB.getReadableDatabase();
-        Cursor cursor = locationsDB.getData(mDB);
-
-        int columns = cursor.getCount();
 
         if (mMap != null) {
             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-            if (columns == 0)
-                Toast.makeText(getActivity(), "No Data",
-                        Toast.LENGTH_LONG).show();
-            else {
-                addMapMarkerFromDB(cursor);
-            }
-            cursor.close();
-            mDB.close();
-
+            new loadAndAddPins().execute();
             // Move the camera instantly to Hastings with a zoom of 15
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HASTINGS_CENTER, 15));
             // Zoom in, animating the camera.
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        }
-    }
-
-    private void addMapMarkerFromDB(Cursor cursor) {
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            String latitude = cursor.getString(1);
-            String longitude = cursor.getString(2);
-            String title = cursor.getString(3);
-            final String snippet = cursor.getString(4);
-            mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)))
-                    .title(title)
-                    .snippet(snippet));
-            cursor.moveToNext();
         }
     }
 
@@ -126,6 +112,92 @@ public class FragmentMap extends Fragment {
             MapsInitializer.initialize(this.getActivity());
         } catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
+        }
+    }
+
+    private class loadAndAddPins extends AsyncTask<String, Void, ArrayList<HashMap<String, String>>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage("Loading Map...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+
+        }
+
+        @Override
+        protected ArrayList<HashMap<String, String>> doInBackground(String... urls) {
+            String jsonStr = loadJsonFromAssets();
+            ArrayList<HashMap<String, String>> mapLocations = new ArrayList<HashMap<String, String>>();
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    // Getting JSON Array node
+                    JSONArray locations = jsonObj.getJSONArray(TAG_LOCATIONS);
+
+                    for (int i = 0; i < locations.length(); i++) {
+                        JSONObject location = locations.getJSONObject(i);
+                        HashMap<String, String> locInfo = new HashMap<String, String>();
+
+                        String latitude = location.getString(TAG_LAT);
+                        String longitude = location.getString(TAG_LONG);
+                        String title = location.getString(TAG_TITLE);
+                        String snippet = location.getString(TAG_SNIPPET);
+                        locInfo.put(TAG_LAT, latitude);
+                        locInfo.put(TAG_LONG, longitude);
+                        locInfo.put(TAG_TITLE, title);
+                        locInfo.put(TAG_SNIPPET, snippet);
+                        mapLocations.add(locInfo);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+                return null;
+            }
+
+            return mapLocations;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<HashMap<String, String>> mapLocations) {
+            super.onPostExecute(mapLocations);
+            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+            for (HashMap<String, String> location : mapLocations) {
+                mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Double.parseDouble(location.get(TAG_LAT)), Double.parseDouble(location.get(TAG_LONG))))
+                        .title(location.get(TAG_TITLE))
+                        .snippet(location.get(TAG_SNIPPET)));
+            }
+        }
+
+        protected String loadJsonFromAssets(){
+            String json = null;
+            try {
+                InputStream is = getActivity().getAssets().open("map-data.json");
+                int size = is.available();
+                byte[] buffer = new byte[size];
+
+                is.read(buffer);
+
+                is.close();
+
+                json = new String(buffer, "UTF-8");
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return null;
+            }
+            return json;
         }
     }
 }
