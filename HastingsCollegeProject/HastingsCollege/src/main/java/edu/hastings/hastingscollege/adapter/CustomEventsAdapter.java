@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.hastings.hastingscollege.EventModel;
+import edu.hastings.hastingscollege.model.EventModel;
 import edu.hastings.hastingscollege.R;
 
 public class CustomEventsAdapter extends BaseAdapter {

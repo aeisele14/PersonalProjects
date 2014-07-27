@@ -15,11 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.hastings.hastingscollege.Data;
+import edu.hastings.hastingscollege.model.Data;
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.adapter.CustomSodexoWeekMenuAdapter;
 
 public class FragmentDiningHall extends Fragment {
+
+
+    public static final String TAG = "FragmentDiningHall";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

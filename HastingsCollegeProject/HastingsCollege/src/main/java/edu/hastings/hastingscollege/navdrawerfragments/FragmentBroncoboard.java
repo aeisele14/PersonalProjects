@@ -10,15 +10,16 @@ import android.view.ViewGroup;
 import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
-import edu.hastings.hastingscollege.Connection;
-import edu.hastings.hastingscollege.HttpAuthenticationDialog;
+
+import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
 
 public class FragmentBroncoboard extends Fragment {
 
     WebView myWebView;
     ViewGroup mRootView;
+
+    public static final String TAG = "FragmentBroncoboard";
 
     public static Fragment newInstance(Context context) {
         return new FragmentBroncoboard();

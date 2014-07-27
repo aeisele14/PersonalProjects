@@ -1,4 +1,4 @@
-package edu.hastings.hastingscollege;
+package edu.hastings.hastingscollege.connection;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
+import edu.hastings.hastingscollege.R;
 
 /**
  * HTTP authentication dialog.

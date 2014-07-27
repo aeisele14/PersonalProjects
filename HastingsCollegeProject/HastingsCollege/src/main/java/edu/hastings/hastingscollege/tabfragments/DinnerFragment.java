@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.hastings.hastingscollege.Data;
+import edu.hastings.hastingscollege.model.Data;
 import edu.hastings.hastingscollege.R;
 
 public class DinnerFragment extends Fragment {

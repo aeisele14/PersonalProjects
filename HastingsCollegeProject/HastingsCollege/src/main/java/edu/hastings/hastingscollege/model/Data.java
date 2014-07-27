@@ -1,4 +1,4 @@
-package edu.hastings.hastingscollege;
+package edu.hastings.hastingscollege.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

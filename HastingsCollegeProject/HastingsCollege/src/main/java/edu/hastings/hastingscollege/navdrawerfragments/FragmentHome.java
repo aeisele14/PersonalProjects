@@ -1,6 +1,5 @@
 package edu.hastings.hastingscollege.navdrawerfragments;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -11,13 +10,15 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import edu.hastings.hastingscollege.HttpAuthenticationDialog;
+import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
 
 public class FragmentHome extends Fragment {
 
     WebView myWebView;
     ViewGroup mRootView;
+
+    public static final String TAG = "FragmentHome";
 
     public static Fragment newInstance() {
         return new FragmentHome();

@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import edu.hastings.hastingscollege.R;
 
 public class FragmentAbout extends Fragment {
+
+    public static final String TAG = "FragmentAbout";
+
     public static Fragment newInstance(Context context) { return new FragmentAbout(); }
 
     @Override

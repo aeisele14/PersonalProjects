@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.hastings.hastingscollege.EventModel;
+import edu.hastings.hastingscollege.model.EventModel;
 import edu.hastings.hastingscollege.R;
-import edu.hastings.hastingscollege.ServiceHandler;
+import edu.hastings.hastingscollege.connection.ServiceHandler;
 import edu.hastings.hastingscollege.adapter.CustomEventsAdapter;
 
 public class FragmentCampusEvents extends Fragment {
@@ -47,6 +47,8 @@ public class FragmentCampusEvents extends Fragment {
     ArrayList<HashMap<String, String>> eventsList;
     private ListView eventsListView;
     View view;
+
+    public static final String TAG = "FragmentCampusEvents";
 
     public static Fragment newInstance(Context context) {return new FragmentCampusEvents(); }
 

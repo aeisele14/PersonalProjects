@@ -1,4 +1,4 @@
-package edu.hastings.hastingscollege;
+package edu.hastings.hastingscollege.connection;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

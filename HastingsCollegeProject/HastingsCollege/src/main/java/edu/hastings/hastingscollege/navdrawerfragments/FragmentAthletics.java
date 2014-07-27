@@ -11,13 +11,15 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import edu.hastings.hastingscollege.HttpAuthenticationDialog;
+import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
 
 public class FragmentAthletics extends Fragment {
 
     WebView myWebView;
     ViewGroup mRootView;
+
+    public static final String TAG = "FragmentAthletics";
 
     public static Fragment newInstance(Context context) {
         return new FragmentAthletics();

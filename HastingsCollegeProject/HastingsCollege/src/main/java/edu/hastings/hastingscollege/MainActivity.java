@@ -53,6 +53,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.hastings.hastingscollege.connection.Connection;
+import edu.hastings.hastingscollege.model.Data;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAbout;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAthletics;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentBroncoboard;

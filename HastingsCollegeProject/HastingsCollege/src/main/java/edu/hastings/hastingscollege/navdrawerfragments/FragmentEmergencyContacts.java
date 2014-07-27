@@ -19,6 +19,8 @@ import edu.hastings.hastingscollege.adapter.CustomEContactsAdapter;
 
 public class FragmentEmergencyContacts extends Fragment {
 
+    public static final String TAG = "FragmentEmergencyContacts";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.emergency_contacts, container, false);

@@ -18,7 +18,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import edu.hastings.hastingscollege.Connection;
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.map_db.LocationsDB;
 
@@ -29,6 +28,8 @@ public class FragmentMap extends Fragment {
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
     private SQLiteDatabase mDB;
+
+    public static final String TAG = "FragmentMap";
 
     public FragmentMap() {
         // Empty constructor required for fragment subclasses
