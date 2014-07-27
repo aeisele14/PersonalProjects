@@ -25,11 +25,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8384a55c-bdb4-44fe-a017-28f17c1cad6c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/model/MapLocation.java" />
-      <change type="DELETED" beforePath="C:\Users\Alex\Google Drive\CS\GitHub\PersonalProjects\HastingsCollegeProject\HastingsCollege\src\main\assets\campus_events.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentCampusEvents.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentCampusEvents.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentMap.java" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/navdrawerfragments/FragmentMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HastingsCollege/src/main/assets/map-data.json" afterPath="$PROJECT_DIR$/HastingsCollege/src/main/assets/map-data.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HastingsCollege.iws" />
@@ -114,7 +109,7 @@
       <file leaf-file-name="LocationsDB.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/map_db/LocationsDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8" vertical-offset="20" max-vertical-offset="1921">
+            <state vertical-scroll-proportion="0.53333336" vertical-offset="20" max-vertical-offset="1921">
               <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
               <folding />
             </state>
@@ -2339,7 +2334,11 @@
       <created>1406432803319</created>
       <updated>1406432803319</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Refactored map pins to pull from json instead of DB.">
+      <created>1406435203350</created>
+      <updated>1406435203350</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2347,7 +2346,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31847134" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31847134" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2414,7 +2413,8 @@
     <MESSAGE value="Changed Event to Event Model added refresh for events fragment" />
     <MESSAGE value="Added HTTP Authentication to WebViews. Renamed some sections and respective classes. Added json file to be used for location pins later." />
     <MESSAGE value="Added Tags to fragments and restructured folders" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Tags to fragments and restructured folders" />
+    <MESSAGE value="Refactored map pins to pull from json instead of DB." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored map pins to pull from json instead of DB." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2841,7 +2841,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HastingsCollege/src/main/java/edu/hastings/hastingscollege/map_db/LocationsDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8" vertical-offset="20" max-vertical-offset="1921">
+        <state vertical-scroll-proportion="0.53333336" vertical-offset="20" max-vertical-offset="1921">
           <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
           <folding />
         </state>
