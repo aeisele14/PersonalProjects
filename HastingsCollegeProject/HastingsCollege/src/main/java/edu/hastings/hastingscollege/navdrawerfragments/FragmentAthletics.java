@@ -11,13 +11,18 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class FragmentAthletics extends Fragment {
 
     WebView myWebView;
     ViewGroup mRootView;
+    public Tracker tracker;
 
     public static final String TAG = "FragmentAthletics";
 
@@ -29,6 +34,9 @@ public class FragmentAthletics extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        this.tracker = ((MyApplication) getActivity().getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        this.tracker.setScreenName("Athletics");
+        this.tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

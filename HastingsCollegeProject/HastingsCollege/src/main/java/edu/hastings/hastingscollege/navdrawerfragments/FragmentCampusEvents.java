@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 import edu.hastings.hastingscollege.model.EventModel;
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.connection.ServiceHandler;
@@ -29,6 +33,7 @@ import edu.hastings.hastingscollege.adapter.CustomEventsAdapter;
 public class FragmentCampusEvents extends Fragment {
 
     private ProgressDialog pDialog;
+    public Tracker tracker;
 
     private static String url;
 
@@ -57,6 +62,9 @@ public class FragmentCampusEvents extends Fragment {
         super.onCreate(savedInstanceState);
         eventsList = new ArrayList<HashMap<String, String>>();
         url = getString(R.string.campus_events_url);
+        this.tracker = ((MyApplication) getActivity().getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        this.tracker.setScreenName("Campus Events");
+        this.tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

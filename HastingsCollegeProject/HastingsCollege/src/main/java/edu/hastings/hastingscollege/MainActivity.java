@@ -42,6 +42,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -54,6 +58,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import edu.hastings.hastingscollege.connection.Connection;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 import edu.hastings.hastingscollege.model.Data;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAbout;
 import edu.hastings.hastingscollege.navdrawerfragments.FragmentAthletics;
@@ -82,6 +87,7 @@ public class MainActivity extends FragmentActivity {
 
     private boolean mConnection;
     public static boolean mShouldNotify = true;
+    public Tracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +144,10 @@ public class MainActivity extends FragmentActivity {
             selectItem(0);
         }
         new DownloadXmlTask().execute(getString(R.string.sodexo_menu_url));
+
+        tracker = ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        tracker.setScreenName("Main Activity");
+        tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

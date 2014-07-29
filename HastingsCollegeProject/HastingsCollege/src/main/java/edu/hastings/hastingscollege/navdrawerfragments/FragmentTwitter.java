@@ -11,12 +11,17 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class FragmentTwitter extends Fragment{
 
     public static final String TAG = "FragmentTwitter";
+    public Tracker tracker;
 
     public static Fragment newInstance(Context context) { return new FragmentTwitter(); }
 
@@ -27,6 +32,9 @@ public class FragmentTwitter extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        this.tracker = ((MyApplication) getActivity().getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        this.tracker.setScreenName("Twitter");
+        this.tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override
@@ -37,6 +45,7 @@ public class FragmentTwitter extends Fragment{
         myWebView.getSettings().setBuiltInZoomControls(true);
         myWebView.setWebViewClient(new MyWebViewClient());
        // myWebView.loadDataWithBaseURL(baseURl, widgetInfo, "text/html", "UTF-8", null);
+        //myWebView.loadUrl(getString(R.string.twitter_widget_host_url));
         myWebView.loadUrl(getString(R.string.twitter_widget_host_url));
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override

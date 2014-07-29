@@ -7,8 +7,12 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.adapter.TabsPagerAdapter;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class SodexoMenu extends FragmentActivity {
 
@@ -27,6 +31,10 @@ public class SodexoMenu extends FragmentActivity {
         actionBar.setTitle("Sodexo Menu for " + day);
         actionBar.setDisplayHomeAsUpEnabled(true);
         mViewPager.setAdapter(new TabsPagerAdapter(this.getSupportFragmentManager(), day));
+
+        Tracker t = ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("Menu");
+        t.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

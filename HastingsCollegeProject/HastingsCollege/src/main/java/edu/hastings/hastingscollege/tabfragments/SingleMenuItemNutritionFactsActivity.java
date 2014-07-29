@@ -13,7 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class SingleMenuItemNutritionFactsActivity extends Activity {
 
@@ -79,6 +83,10 @@ public class SingleMenuItemNutritionFactsActivity extends Activity {
         setContentView(nutritionLayout);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Tracker t = ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("Nutrition Facts");
+        t.send(new HitBuilders.AppViewBuilder().build());
     }
 
     @Override

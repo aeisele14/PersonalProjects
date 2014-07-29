@@ -11,15 +11,28 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.ArrayList;
 
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.adapter.ContactsDataModel;
 import edu.hastings.hastingscollege.adapter.CustomEContactsAdapter;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class FragmentEmergencyContacts extends Fragment {
 
     public static final String TAG = "FragmentEmergencyContacts";
+    public Tracker tracker;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.tracker = ((MyApplication) getActivity().getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        this.tracker.setScreenName("Campus Contacts");
+        this.tracker.send(new HitBuilders.AppViewBuilder().build());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {

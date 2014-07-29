@@ -9,12 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 import edu.hastings.hastingscollege.model.Data;
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.adapter.CustomSodexoWeekMenuAdapter;
@@ -23,6 +27,15 @@ public class FragmentDiningHall extends Fragment {
 
 
     public static final String TAG = "FragmentDiningHall";
+    public Tracker tracker;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        this.tracker = ((MyApplication) getActivity().getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        this.tracker.setScreenName("Dining Hall");
+        this.tracker.send(new HitBuilders.AppViewBuilder().build());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

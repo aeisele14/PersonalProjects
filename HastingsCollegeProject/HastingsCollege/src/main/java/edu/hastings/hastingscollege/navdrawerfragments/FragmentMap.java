@@ -2,8 +2,6 @@ package edu.hastings.hastingscollege.navdrawerfragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,8 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,23 +24,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.hastings.hastingscollege.R;
-import edu.hastings.hastingscollege.adapter.CustomEventsAdapter;
-import edu.hastings.hastingscollege.connection.ServiceHandler;
-import edu.hastings.hastingscollege.map_db.LocationsDB;
-import edu.hastings.hastingscollege.model.EventModel;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
+import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class FragmentMap extends Fragment {
 
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
     private ProgressDialog pDialog;
+    public Tracker tracker;
 
     public static final String TAG = "FragmentMap";
     private static final String TAG_LOCATIONS = "Locations";
@@ -110,9 +106,13 @@ public class FragmentMap extends Fragment {
 
         try {
             MapsInitializer.initialize(this.getActivity());
-        } catch (GooglePlayServicesNotAvailableException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
+        this.tracker = ((MyApplication) getActivity().getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+        this.tracker.setScreenName("Campus Map");
+        this.tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
     private class loadAndAddPins extends AsyncTask<String, Void, ArrayList<HashMap<String, String>>> {
