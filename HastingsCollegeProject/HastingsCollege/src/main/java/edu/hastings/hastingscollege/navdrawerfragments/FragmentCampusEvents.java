@@ -18,17 +18,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.adapter.CustomEventsAdapter;
+import edu.hastings.hastingscollege.connection.ServiceHandler;
 import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 import edu.hastings.hastingscollege.model.EventModel;
-import edu.hastings.hastingscollege.R;
-import edu.hastings.hastingscollege.connection.ServiceHandler;
-import edu.hastings.hastingscollege.adapter.CustomEventsAdapter;
 
 public class FragmentCampusEvents extends Fragment {
 
@@ -60,7 +58,7 @@ public class FragmentCampusEvents extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        eventsList = new ArrayList<HashMap<String, String>>();
+        eventsList = new ArrayList<>();
         url = getString(R.string.campus_events_url);
         this.tracker = ((MyApplication) getActivity().getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
         this.tracker.setScreenName("Campus Events");
@@ -99,7 +97,7 @@ public class FragmentCampusEvents extends Fragment {
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(urls[0], ServiceHandler.GET);
             //String jsonStr = loadJsonFromAssets();
-            ArrayList<EventModel> eventsArrayList = new ArrayList<EventModel>();
+            ArrayList<EventModel> eventsArrayList = new ArrayList<>();
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -111,7 +109,7 @@ public class FragmentCampusEvents extends Fragment {
                     for (int i = 0; i < events.length(); i++) {
                         JSONObject c = events.getJSONObject(i);
 
-                        List<List<HashMap<String, String>>> eventInformationList = new ArrayList<List<HashMap<String, String>>>();
+                        List<List<HashMap<String, String>>> eventInformationList = new ArrayList<>();
 
                         String eventName = c.getString(TAG_EVENT);
                         String eventWeek = c.getString(TAG_EVENT_WEEK);
@@ -119,7 +117,7 @@ public class FragmentCampusEvents extends Fragment {
                         String[] eventDayNames = new String[eventInfo.length()];
 
                         for (int j = 0; j < eventInfo.length(); j++) {
-                            List<HashMap<String, String>> eventDaysList = new ArrayList<HashMap<String, String>>();
+                            List<HashMap<String, String>> eventDaysList = new ArrayList<>();
 
                             JSONObject eventDay = eventInfo.getJSONObject(j);
                             String eventDayName = eventDay.getString(TAG_DAY);
@@ -127,7 +125,7 @@ public class FragmentCampusEvents extends Fragment {
 
                             JSONArray eventDays = eventDay.getJSONArray(TAG_EVENTS_OF_DAY);
                             for (int k = 0; k < eventDays.length(); k++) {
-                                HashMap<String, String> eventOfDayInfoMap = new HashMap<String, String>();
+                                HashMap<String, String> eventOfDayInfoMap = new HashMap<>();
                                 JSONObject eventOfDayInfo = eventDays.getJSONObject(k);
                                 String eventOfDayTitle = eventOfDayInfo.getString(TAG_TITLE);
                                 String eventOfDayLocation = eventOfDayInfo.getString(TAG_LOCATION);

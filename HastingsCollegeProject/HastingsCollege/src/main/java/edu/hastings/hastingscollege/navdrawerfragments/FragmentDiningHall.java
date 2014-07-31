@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.hastings.hastingscollege.googleanalytics.MyApplication;
-import edu.hastings.hastingscollege.model.Data;
 import edu.hastings.hastingscollege.R;
 import edu.hastings.hastingscollege.adapter.CustomSodexoWeekMenuAdapter;
+import edu.hastings.hastingscollege.googleanalytics.MyApplication;
+import edu.hastings.hastingscollege.model.Data;
 
 public class FragmentDiningHall extends Fragment {
 
@@ -48,9 +48,9 @@ public class FragmentDiningHall extends Fragment {
             final String KEY_ITEM_DATE = "menudate";
             final String KEY_DAY = "dayname";
             final String[] dates = formatDates(Data.dates);
-            final List<HashMap<String, String>> daysList = new ArrayList<HashMap<String, String>>();
+            final List<HashMap<String, String>> daysList = new ArrayList<>();
             for (int i = 0; i < mDaysOfWeek.length; i++) {
-                HashMap<String, String> dayOfWeek = new HashMap<String, String>();
+                HashMap<String, String> dayOfWeek = new HashMap<>();
                 dayOfWeek.put(KEY_DAY, mDaysOfWeek[i]);
                 dayOfWeek.put(KEY_ITEM_DATE, dates[i]);
                 daysList.add(dayOfWeek);

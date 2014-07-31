@@ -14,8 +14,8 @@ import android.webkit.WebViewClient;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class FragmentTwitter extends Fragment{
@@ -45,7 +45,6 @@ public class FragmentTwitter extends Fragment{
         myWebView.getSettings().setBuiltInZoomControls(true);
         myWebView.setWebViewClient(new MyWebViewClient());
        // myWebView.loadDataWithBaseURL(baseURl, widgetInfo, "text/html", "UTF-8", null);
-        //myWebView.loadUrl(getString(R.string.twitter_widget_host_url));
         myWebView.loadUrl(getString(R.string.twitter_widget_host_url));
         myWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override

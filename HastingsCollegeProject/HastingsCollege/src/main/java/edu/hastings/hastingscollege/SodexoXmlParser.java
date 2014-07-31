@@ -3,13 +3,13 @@ package edu.hastings.hastingscollege;
 import android.content.Context;
 import android.util.Log;
 import android.util.Xml;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class SodexoXmlParser {
     }
 
     private List<HashMap<String, String>> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
-        List<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
+        List<HashMap<String, String>> menuItems = new ArrayList<>();
         int event;
         try {
             event = parser.getEventType();
@@ -61,7 +61,7 @@ public class SodexoXmlParser {
     }
 
     private HashMap<String, String> readMenuItem(XmlPullParser parser) throws XmlPullParserException, IOException {
-        HashMap<String, String> menuItem = new HashMap<String, String>();
+        HashMap<String, String> menuItem = new HashMap<>();
         String[] menuItemKeys = mContext.getResources().getStringArray(R.array.sodexo_menu_item_keys);
         int attributeCount = parser.getAttributeCount();
         if (attributeCount != -1) {

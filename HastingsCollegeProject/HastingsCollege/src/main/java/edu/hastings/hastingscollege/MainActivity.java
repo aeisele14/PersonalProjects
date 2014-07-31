@@ -17,15 +17,12 @@ package edu.hastings.hastingscollege;
  */
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -42,7 +39,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -111,7 +107,7 @@ public class MainActivity extends FragmentActivity {
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, navMenuTitles));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, navMenuTitles));
 
         mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
 
@@ -146,7 +142,7 @@ public class MainActivity extends FragmentActivity {
         new DownloadXmlTask().execute(getString(R.string.sodexo_menu_url));
 
         tracker = ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
-        tracker.setScreenName("Main Activity");
+        tracker.setScreenName("App Opened");
         tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 
@@ -194,8 +190,8 @@ public class MainActivity extends FragmentActivity {
     public static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
+            for (String aChildren : children) {
+                boolean success = deleteDir(new File(dir, aChildren));
                 if (!success) {
                     return false;
                 }
@@ -361,8 +357,7 @@ public class MainActivity extends FragmentActivity {
         conn.setDoInput(true);
         // Starts the query
         conn.connect();
-        InputStream stream = conn.getInputStream();
-        return stream;
+        return conn.getInputStream();
     }
 
 
@@ -377,19 +372,11 @@ public class MainActivity extends FragmentActivity {
     // Implementation of AsyncTask used to download XML feed
     private class DownloadXmlTask extends AsyncTask<String, Void, List<HashMap<String, String>>> {
 
-        ProgressDialog progressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-                progressDialog = ProgressDialog.show(MainActivity.this, "Hastings College", "Loading...");
-        }
-
         @Override
         protected List<HashMap<String, String>> doInBackground(String... urls) {
             InputStream stream = null;
             SodexoXmlParser sodexoXmlParser = new SodexoXmlParser(MainActivity.this);
-            List<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> menuItems = new ArrayList<>();
             try {
                 try {
                     stream = downloadUrl(urls[0]);
@@ -416,21 +403,19 @@ public class MainActivity extends FragmentActivity {
             }
             else
                 showSodexoError();
-            if (progressDialog.isShowing())
-                progressDialog.dismiss();
         }
 
         protected void retrieveItems(List<HashMap<String, String>> menuItems) {
             final String KEY_ITEM_DATE = "menudate";
             final String KEY_DAY = "dayname";
 
-            List<HashMap<String, String>> sundayMenu = new ArrayList<HashMap<String, String>>();
-            List<HashMap<String, String>> mondayMenu = new ArrayList<HashMap<String, String>>();
-            List<HashMap<String, String>> tuesdayMenu = new ArrayList<HashMap<String, String>>();
-            List<HashMap<String, String>> wednesdayMenu = new ArrayList<HashMap<String, String>>();
-            List<HashMap<String, String>> thursdayMenu = new ArrayList<HashMap<String, String>>();
-            List<HashMap<String, String>> fridayMenu = new ArrayList<HashMap<String, String>>();
-            List<HashMap<String, String>> saturdayMenu = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> sundayMenu = new ArrayList<>();
+            List<HashMap<String, String>> mondayMenu = new ArrayList<>();
+            List<HashMap<String, String>> tuesdayMenu = new ArrayList<>();
+            List<HashMap<String, String>> wednesdayMenu = new ArrayList<>();
+            List<HashMap<String, String>> thursdayMenu = new ArrayList<>();
+            List<HashMap<String, String>> fridayMenu = new ArrayList<>();
+            List<HashMap<String, String>> saturdayMenu = new ArrayList<>();
             String[] dates = new String[7];
 
             for (HashMap<String, String> menuItem : menuItems) {

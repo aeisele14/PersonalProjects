@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.hastings.hastingscollege.model.Data;
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.model.Data;
 
 public class DinnerFragment extends Fragment {
 
@@ -94,7 +94,7 @@ public class DinnerFragment extends Fragment {
     }
 
     private List<HashMap<String, String>> getDinnerItems(List<HashMap<String, String>> menuItems) {
-        List<HashMap<String, String>> lunchItems = new ArrayList<HashMap<String, String>>();
+        List<HashMap<String, String>> lunchItems = new ArrayList<>();
 
         for (HashMap<String, String> menuItem : menuItems) {
             if (menuItem.get(KEY_MEAL).equals("Dinner")) {
@@ -119,6 +119,6 @@ public class DinnerFragment extends Fragment {
             return getDinnerItems(Data.saturdayMenu);
         else if (day.equals(daysOfWeek[6]))
             return getDinnerItems(Data.sundayMenu);
-        return new ArrayList<HashMap<String, String>>();
+        return new ArrayList<>();
     }
 }

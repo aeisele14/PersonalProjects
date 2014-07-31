@@ -14,8 +14,8 @@ import android.webkit.WebViewClient;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.R;
+import edu.hastings.hastingscollege.connection.HttpAuthenticationDialog;
 import edu.hastings.hastingscollege.googleanalytics.MyApplication;
 
 public class FragmentAthletics extends Fragment {

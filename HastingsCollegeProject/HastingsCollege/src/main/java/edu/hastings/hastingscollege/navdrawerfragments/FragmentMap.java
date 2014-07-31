@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -97,7 +96,7 @@ public class FragmentMap extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return (ViewGroup) inflater.inflate(R.layout.map, null);
+        return inflater.inflate(R.layout.map, null);
     }
 
     @Override
@@ -131,7 +130,7 @@ public class FragmentMap extends Fragment {
         @Override
         protected ArrayList<HashMap<String, String>> doInBackground(String... urls) {
             String jsonStr = loadJsonFromAssets();
-            ArrayList<HashMap<String, String>> mapLocations = new ArrayList<HashMap<String, String>>();
+            ArrayList<HashMap<String, String>> mapLocations = new ArrayList<>();
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
@@ -140,7 +139,7 @@ public class FragmentMap extends Fragment {
 
                     for (int i = 0; i < locations.length(); i++) {
                         JSONObject location = locations.getJSONObject(i);
-                        HashMap<String, String> locInfo = new HashMap<String, String>();
+                        HashMap<String, String> locInfo = new HashMap<>();
 
                         String latitude = location.getString(TAG_LAT);
                         String longitude = location.getString(TAG_LONG);
@@ -180,7 +179,7 @@ public class FragmentMap extends Fragment {
         }
 
         protected String loadJsonFromAssets(){
-            String json = null;
+            String json;
             try {
                 InputStream is = getActivity().getAssets().open("map-data.json");
                 int size = is.available();
