@@ -161,7 +161,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
     }
 
@@ -257,56 +257,78 @@ public class MainActivity extends FragmentActivity {
         // update the main content frame by replacing fragments
         Fragment fragment = null;
         mFragPosition = position;
-        if (mConnection) {
-            switch (position) {
-                case 0:
+        // Fragments requiriing connection
+        switch (position) {
+            case 0:
+                if (mConnection) {
                     fragment = new FragmentHome();
-                    break;
-                case 1:
-                    fragment = new FragmentMap();
-                    break;
-                case 2:
+
+                } else {
+                    buildDialog(this).show();
+                }
+                break;
+            case 1:
+                fragment = new FragmentMap();
+                break;
+            case 2:
+                if (mConnection) {
                     fragment = new FragmentDiningHall();
-                    break;
-                case 3:
+                } else {
+                    buildDialog(this).show();
+                }
+                break;
+            case 3:
+                if (mConnection) {
                     fragment = new FragmentBroncoboard();
-                    break;
-                case 4:
+                } else {
+                    buildDialog(this).show();
+                }
+                break;
+            case 4:
+                if (mConnection) {
                     fragment = new FragmentTwitter();
-                    break;
-                case 5:
+                } else {
+                    buildDialog(this).show();
+                }
+                break;
+            case 5:
+                if (mConnection) {
                     fragment = new FragmentCampusEvents();
-                    break;
-                case 6:
+                } else {
+                    buildDialog(this).show();
+                }
+                break;
+            case 6:
+                if (mConnection) {
                     fragment = new FragmentAthletics();
-                    break;
-                case 7:
-                    fragment = new FragmentEmergencyContacts();
-                    break;
-                case 8:
-                    fragment = new FragmentAbout();
-                default:
-                    break;
-            }
-
-            if (fragment != null) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, fragment).commit();
-
-                // update selected item and title, then close the drawer
-                mDrawerList.setItemChecked(position, true);
-                mDrawerList.setSelection(position);
-                setTitle(navMenuTitles[position]);
-                mDrawerLayout.closeDrawer(mDrawerList);
-            } else {
-                // error in creating fragment
-                Log.e("MainActivity", "Error in creating fragment");
-            }
+                } else {
+                    buildDialog(this).show();
+                }
+                break;
+            case 7:
+                fragment = new FragmentEmergencyContacts();
+                break;
+            case 8:
+                fragment = new FragmentAbout();
+            default:
+                break;
         }
-        else {
-            buildDialog(this).show();
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment).commit();
+
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerList.setSelection(position);
+            setTitle(navMenuTitles[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
+        } else {
+            // error in creating fragment
+            Log.e("MainActivity", "Error in creating fragment");
         }
+
     }
 
     @Override
@@ -340,7 +362,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                finish();
+                //finish();
             }
         });
         return builder;
@@ -400,8 +422,7 @@ public class MainActivity extends FragmentActivity {
             super.onPostExecute(menuItems);
             if (menuItems != null) {
                 retrieveItems(menuItems);
-            }
-            else
+            } else
                 showSodexoError();
         }
 
@@ -422,28 +443,22 @@ public class MainActivity extends FragmentActivity {
                 if (menuItem.get(KEY_DAY).equals("Monday")) {
                     mondayMenu.add(menuItem);
                     dates[0] = menuItem.get(KEY_ITEM_DATE);
-                }
-                else if (menuItem.get(KEY_DAY).equals("Tuesday")) {
+                } else if (menuItem.get(KEY_DAY).equals("Tuesday")) {
                     tuesdayMenu.add(menuItem);
                     dates[1] = menuItem.get(KEY_ITEM_DATE);
-                }
-                else if (menuItem.get(KEY_DAY).equals("Wednesday")) {
+                } else if (menuItem.get(KEY_DAY).equals("Wednesday")) {
                     wednesdayMenu.add(menuItem);
                     dates[2] = menuItem.get(KEY_ITEM_DATE);
-                }
-                else if (menuItem.get(KEY_DAY).equals("Thursday")) {
+                } else if (menuItem.get(KEY_DAY).equals("Thursday")) {
                     thursdayMenu.add(menuItem);
                     dates[3] = menuItem.get(KEY_ITEM_DATE);
-                }
-                else if (menuItem.get(KEY_DAY).equals("Friday")) {
+                } else if (menuItem.get(KEY_DAY).equals("Friday")) {
                     fridayMenu.add(menuItem);
                     dates[4] = menuItem.get(KEY_ITEM_DATE);
-                }
-                else if (menuItem.get(KEY_DAY).equals("Saturday")) {
+                } else if (menuItem.get(KEY_DAY).equals("Saturday")) {
                     saturdayMenu.add(menuItem);
                     dates[5] = menuItem.get(KEY_ITEM_DATE);
-                }
-                else if (menuItem.get(KEY_DAY).equals("Sunday")) {
+                } else if (menuItem.get(KEY_DAY).equals("Sunday")) {
                     sundayMenu.add(menuItem);
                     dates[6] = menuItem.get(KEY_ITEM_DATE);
                 }
