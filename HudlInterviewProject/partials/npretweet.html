@@ -1,0 +1,42 @@
+<div class="container" ng-controller="queryController">
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="page-header">NPRetweet
+                <small>Retweet any of the top 20 stories from NPR today</small>
+            </h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <div class="panel-group" id="accordion">
+
+                <div class="panel panel-default" ng-repeat="entry in stories.list.story">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
+                               ng-href="{{entry.link[2].$text}}">
+                                {{entry.title.$text}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- /.container -->
